@@ -34,13 +34,6 @@ public:
 		m_Draws = _RandomDraw->m_Draws;
 	}
 
-	FORCEINLINE void operator=(FRDRandomDraw& _Other)
-	{
-		m_ID = _Other.m_ID;
-		m_Libelle = _Other.m_Libelle;
-		m_Draws = _Other.m_Draws;
-	}
-
 	FORCEINLINE void operator=(FRDRandomDraw _Other)
 	{
 		m_ID = _Other.m_ID;

@@ -58,22 +58,6 @@ public:
 		return (GetIsInSameGroup(_Person->m_FirstGroupID) || GetIsInSameGroup(_Person->m_SecondGroupID));
 	}
 
-	/*FORCEINLINE void operator=(FRDPerson* _Other)
-	{
-		m_ID = _Other->m_ID;
-		m_Name = _Other->m_Name;
-		m_FirstGroupID = _Other->m_FirstGroupID;
-		m_SecondGroupID = _Other->m_SecondGroupID;
-	}*/
-
-	FORCEINLINE void operator=(FRDPerson& _Other)
-	{
-		m_ID = _Other.m_ID;
-		m_Name = _Other.m_Name;
-		m_FirstGroupID = _Other.m_FirstGroupID;
-		m_SecondGroupID = _Other.m_SecondGroupID;
-	}
-
 	FORCEINLINE void operator=(FRDPerson _Other)
 	{
 		m_ID = _Other.m_ID;

@@ -37,21 +37,7 @@ public:
 		m_Persons = _AppData->m_Persons;
 		m_RandomDraws = _AppData->m_RandomDraws;
 	}
-
-	/*FORCEINLINE void operator=(FRDAppData* _Other)
-	{
-		m_Groups = _Other->m_Groups;
-		m_Persons = _Other->m_Persons;
-		m_RandomDraws = _Other->m_RandomDraws;
-	}*/
-
-	FORCEINLINE void operator=(FRDAppData& _Other)
-	{
-		m_Groups = _Other.m_Groups;
-		m_Persons = _Other.m_Persons;
-		m_RandomDraws = _Other.m_RandomDraws;
-	}
-
+	
 	FORCEINLINE void operator=(FRDAppData _Other)
 	{
 		m_Groups = _Other.m_Groups;

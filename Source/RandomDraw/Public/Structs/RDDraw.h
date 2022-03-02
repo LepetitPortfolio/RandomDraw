@@ -41,12 +41,6 @@ public:
 		m_SecondPersonID = _Draw->m_SecondPersonID;
 	}
 
-	FORCEINLINE void operator=(FRDDraw& _Other)
-	{
-		m_FirstPersonID = _Other.m_FirstPersonID;
-		m_SecondPersonID = _Other.m_SecondPersonID;
-	}
-
 	FORCEINLINE void operator=(FRDDraw _Other)
 	{
 		m_FirstPersonID = _Other.m_FirstPersonID;

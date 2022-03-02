@@ -33,31 +33,10 @@ public:
 		m_Color = _Group->m_Color;
 	}
 
-	/*FORCEINLINE void operator=(FRDGroup* _Other)
-	{
-		m_ID = _Other->m_ID;
-		m_Libelle = _Other->m_Libelle;
-		m_Color = _Other->m_Color;
-	}*/
-
-	FORCEINLINE void operator=(FRDGroup& _Other)
-	{
-		m_ID = _Other.m_ID;
-		m_Libelle = _Other.m_Libelle;
-		m_Color = _Other.m_Color;
-	}
-
 	FORCEINLINE void operator=(FRDGroup _Other)
 	{
 		m_ID = _Other.m_ID;
 		m_Libelle = _Other.m_Libelle;
 		m_Color = _Other.m_Color;
 	}
-
-	/*static void operator=(FRDGroup& _First, FRDGroup& _Second)
-	{
-		_First.m_ID = _Second.m_ID;
-		_First.m_Libelle = _Second.m_Libelle;
-		_First.m_Color = _Second.m_Color;
-	}*/
 };
