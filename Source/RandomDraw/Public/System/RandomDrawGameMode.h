@@ -19,44 +19,86 @@ class RANDOMDRAW_API ARandomDrawGameMode : public AGameModeBase
 
 public:
 
+	/**
+	* Changes the menu state with that changes the ui displayed
+	* @param _MenuStat - new stat menu
+	* @param _UIPriority - Ui priority
+	*/
 	UFUNCTION()
 		void ChangeMenuState(ERDMenuStat _MenuStat, ERDUIPriority _UIPriority);
 
+	/**
+	* return an dre-displays the last menu stat
+	*/
 	UFUNCTION()
 		void  ReturnToLastManuState();
 
+	/**
+	* Displays a new UI poppup
+	* @param _PopupUI - new popup type displayed
+	* @param _UIPriority - popup priority diplay
+	*/
 	UFUNCTION()
 		void DisplayPopupUI(ERDPopupUI _PopupUI, ERDUIPriority _UIPriority);
 
+	/**
+	* return a reference of popup displayed
+	* @retrurn a reference of popup
+	*/
 	UFUNCTION()
 		URDUIBase* GetPopupUI();
 
+	/**
+	* return a reference of save manager
+	* @return the reference of save manager
+	*/
 	UFUNCTION()
 		inline class URDSaveManager* GetSaveManager() { return m_SaveManager; }
 
+	/**
+	* return a reference of person manager
+	* @return the reference of person manager
+	*/
 	UFUNCTION()
 		inline class URDPersonManager* GetPersonManager() { return m_PersonManager; }
 
+	/**
+	* return a reference of group manager
+	* @return the reference of group manager
+	*/
 	UFUNCTION()
 		inline class URDGroupManager* GetGroupManager() { return m_GroupManager; }
 
+	/**
+	* return a reference of random draw manager
+	* @return the reference of random draw manager
+	*/
 	UFUNCTION()
 		inline class URDRandomDrawManager* GetRandomDrawManager() { return m_RandomDrawManager; }
 
-	//UFUNCTION()
-		inline FRDAppData* GetAppData() { return &m_AppData; }
+	/**
+	* return the referenc of appdata
+	* @return referenc of appdata
+	*/
+	inline FRDAppData* GetAppData() { return &m_AppData; }
 
-	//UFUNCTION()
-		void SetAppData(FRDAppData* _NewAppData);
+	/**
+	* set a new reference of appdata
+	* @param _NewAppData - new appdata reference
+	*/
+	void SetAppData(FRDAppData* _NewAppData);
 
 protected:
 
+	/* Type of current Menu state displayed */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = RDGameMode)
 		ERDMenuStat m_CurrentMenuStat = ERDMenuStat::None;
 
+	/* informztion of diplay priority of mune state dis^played */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = RDGameMode)
 		ERDUIPriority m_CurrentUIPriority = ERDUIPriority::Priority0;
 
+	/* reference of HUD object */
 	UPROPERTY(BlueprintReadOnly, Category = RDGameMode)
 		class ARDHUD* m_RDHUD = nullptr;
 

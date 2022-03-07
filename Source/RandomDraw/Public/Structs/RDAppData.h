@@ -30,7 +30,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDAppData)
 	TMap<FString, FRDRandomDraw> m_RandomDraws = TMap<FString, FRDRandomDraw>();
 
+	/**
+	* Constructor
+	*/
 	FRDAppData() {}
+	/**
+	* Constructor by copy
+	*/
 	FRDAppData(const FRDAppData* _AppData)
 	{
 		m_Groups = _AppData->m_Groups;

@@ -74,6 +74,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = RDFunctionLibrary)
 	static void ChangeMenuState(ERDMenuStat _MenuStat, ERDUIPriority _UIPriority = ERDUIPriority::Priority1);
 
+	/**
+	* lauch the process to display the last Menu displayed
+	*/
 	UFUNCTION(BlueprintCallable, Category = RDFunctionLibrary)
 	static void ReturnToLastManuState();
 
@@ -85,6 +88,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = RDFunctionLibrary)
 	static void DisplayPopupUI(ERDPopupUI _PopupUI, ERDUIPriority _UIPriority = ERDUIPriority::Priority5);
 
+	/**
+	* Return the current poppup
+	* @return the reference of current popup
+	*/
 	UFUNCTION(BlueprintCallable, Category = RDFunctionLibrary)
 	static URDUIBase* GetPopupUI();
 
@@ -92,13 +99,26 @@ public:
 	* Getter of the App data
 	* @return the reference of the App data
 	*/
-	//UFUNCTION(BlueprintCallable, Category = RDFunctionLibrary)
 	static FRDAppData* GetAppData();
 
+	/**
+	* Set a new reference of appdata value
+	* @param new appdata reference
+	*/
 	static void SetAppData(FRDAppData* _AppData);
 
+	/**
+	* Return a person reference based on pason ID
+	* @param _PersonID - person ID of person searched
+	* @return person reference of person searched
+	*/
 	static FRDPerson* GetPerson(FString _PersonID);
 
+	/**
+	* Return a group reference based on group ID
+	* @param _GroupID - person ID of group searched
+	* @return group reference of group searched
+	*/
 	static FRDGroup* GetGroup(FString _GroupID);
 
 

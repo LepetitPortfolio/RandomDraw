@@ -15,18 +15,25 @@ struct RANDOMDRAW_API FRDRandomDraw
 	GENERATED_BODY()
 
 public:
-
+	/* Random draw ID */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDRandomDraw)
 		FString m_ID = "";
 
+	/* Random draw Libelle */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDRandomDraw)
 	FString m_Libelle = "";
 
+	/* List of draw of random draw */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDRandomDraw)
 	TArray<FRDDraw> m_Draws = TArray<FRDDraw>();
 
+	/**
+	* Constructor
+	*/
 	FRDRandomDraw(){}
-
+	/**
+	* Constructor by copy
+	*/
 	FRDRandomDraw(const FRDRandomDraw* _RandomDraw)
 	{
 		m_ID = _RandomDraw->m_ID;

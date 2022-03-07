@@ -16,11 +16,16 @@ struct RANDOMDRAW_API FRDUIInstance
 
 public:
 
+	/* UI Template */
 	UPROPERTY(EditDefaultsOnly, Category = RDUIInstance)
 	TSubclassOf<URDUIBase> m_UITemplate;
 
+	/* UI Instance */
 	UPROPERTY()
 	URDUIBase* m_Instance = nullptr;
 
+	/**
+	* Contructor
+	*/
 	FRDUIInstance(){}
 };

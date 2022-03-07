@@ -16,16 +16,25 @@ struct RANDOMDRAW_API FRDGroup
 
 public:
 	
+	/* Group ID */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDGroup)
 		FString m_ID = "";
 	
+	/* Group Libelle */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDGroup)
 		FString m_Libelle = "";
 
+	/* Group color */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDGroup)
 		FLinearColor m_Color = FLinearColor::Black;
 
+	/**
+	* Constructor
+	*/
 	FRDGroup(){}
+	/**
+	* Constructor by copy
+	*/
 	FRDGroup(const FRDGroup* _Group)
 	{
 		m_ID = _Group->m_ID;

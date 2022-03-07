@@ -17,11 +17,16 @@ struct RANDOMDRAW_API FRDStateHistory
 
 public:
 
+	/* UI Menu stat */
 	UPROPERTY()
 		ERDMenuStat m_MenuStat;
 
+	/* UI display priority */
 	UPROPERTY()
 		ERDUIPriority m_UIPriority;
 
+	/**
+	* Constructor
+	*/
 	FRDStateHistory(){}
 };

@@ -16,20 +16,29 @@ struct RANDOMDRAW_API FRDPerson
 
 public:
 	
+	/* Person ID */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDPerson)
 		FString m_ID = "";
 
+	/* Person Name */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDPerson)
 		FString m_Name = "";
 	
+	/* First group ID */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDPerson)
 		FString m_FirstGroupID = "";
 
+	/* Second group ID */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDPerson)
 		FString m_SecondGroupID = "";
 
+	/**
+	* Constructor
+	*/
 	FRDPerson(){}
-
+	/**
+	* Constructor by copy
+	*/
 	FRDPerson(const FRDPerson* _Person)
 	{
 		m_ID = _Person->m_ID;
@@ -38,6 +47,11 @@ public:
 		m_SecondGroupID = _Person->m_SecondGroupID;
 	}
 
+	/**
+	* Indicates if the person is in same group in input
+	* @param _GroupID - group comparated
+	* @return indicates or not if the person is contained in the group
+	*/
 	bool GetIsInSameGroup(FString _GroupID)
 	{
 		if (_GroupID.IsEmpty())
@@ -53,6 +67,11 @@ public:
 		return false;
 	}
 
+	/**
+	* Indicates if the person is in same person in input
+	* @param _Person - group comparated
+	* @return indicates or not if the person is contained in the person group
+	*/
 	bool GetIsInSameGroup(FRDPerson* _Person)
 	{
 		return (GetIsInSameGroup(_Person->m_FirstGroupID) || GetIsInSameGroup(_Person->m_SecondGroupID));
