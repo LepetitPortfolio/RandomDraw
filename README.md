@@ -1,8 +1,8 @@
 # RandomDraw
 
-#### Project discription
-Project Type : Unreal Engine 4 project
-UE4 Version : 4.27
+#### Project discription :
+- Project Type : UE4 project
+- UE4 Version : 4.27
 
 #### Discription : 
 Mobile application to make random draws. By example for choose who to gift a christmas present by random
