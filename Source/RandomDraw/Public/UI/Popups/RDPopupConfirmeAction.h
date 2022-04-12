@@ -18,17 +18,23 @@ class RANDOMDRAW_API URDPopupConfirmeAction : public URDPopupBase
 
 public:
 
+	/**
+	* Initialize the popup value
+	* @param _Message - Message displayed
+	* @param _ActionsToDo - action to do after validation
+	*/
 	void InitPopupValue(FString _Message, FValidateAction const& _ActionsToDo);
 
 protected:
-	
+
+	/* Message displayed on the popup */
 	UPROPERTY(BlueprintReadWrite, Category = PopupConfirmeAction)
 	FString m_PopupMessage = "";
 
 	/* Action to do after validation */
 	FValidateAction m_ActionEvent;
 
-	/*
+	/**
 	* Valids and executes the actions to do
 	*/
 	UFUNCTION(BlueprintCallable, Category = PopupConfirmeAction)

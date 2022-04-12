@@ -102,22 +102,35 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = RDGameMode)
 		class ARDHUD* m_RDHUD = nullptr;
 
+	/* Application Data */
 	UPROPERTY(BlueprintReadOnly, Category = RDGameMode)
 		FRDAppData m_AppData = FRDAppData();
 
+	/* Manager to managing all save data */
 	UPROPERTY(BlueprintReadOnly, Category = RDGameMode)
 		class URDSaveManager* m_SaveManager = nullptr;
+	/* Manager to managing all person data */
 	UPROPERTY(BlueprintReadOnly, Category = RDGameMode)
 		class URDPersonManager* m_PersonManager = nullptr;
+	/* Manager to managing all group data */
 	UPROPERTY(BlueprintReadOnly, Category = RDGameMode)
 		class URDGroupManager* m_GroupManager = nullptr;
+	/* Manager to managing all Random draw data */
 	UPROPERTY(BlueprintReadOnly, Category = RDGameMode)
 		class URDRandomDrawManager* m_RandomDrawManager = nullptr;
 
+	/* History of menu stat displayed */
 	UPROPERTY(BlueprintReadOnly, Category = RDGameMode)
 		TArray<FRDStateHistory> m_MenuStateHistory;
 
+	/** 
+	* UE4 Function, launched when the object is instantiate 
+	*/
 	virtual void BeginPlay() override;
 
+	/** 
+	* UE4 Function, launched just before the destruction of the object 
+	* @param EndPlayReason - Reason of end play
+	*/
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 };

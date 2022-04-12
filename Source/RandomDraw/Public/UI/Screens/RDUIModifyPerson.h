@@ -19,24 +19,39 @@ class RANDOMDRAW_API URDUIModifyPerson : public URDUIBase
 	
 protected:
 
+	/* First person Group modify */
 	UPROPERTY(BlueprintReadOnly, Category = RDUICreatePerson, meta = (BindWidget))
 		URDWidgetGroupSelector* m_FirstGroupSelector;
 
+	/* Second person Group modify */
 	UPROPERTY(BlueprintReadOnly, Category = RDUICreatePerson, meta = (BindWidget))
 		URDWidgetGroupSelector* m_SecondGroupSelector;
 
+	/* reference of person to modify */
 	FRDPerson* m_Person = nullptr;
 
+	/* Person name modify */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDUICreateGroup)
 		FString m_PersonName = "";
 
+	/**
+	* UE4 Function : Called when the object is construct
+	*/
 	virtual void NativeOnInitialized() override;
-
+	/**
+	* UE4 Function : Called just before to display the UMG
+	*/
 	virtual void NativeConstruct() override;
 
+	/**
+	* Lauch the process for modify the person selected
+	*/
 	UFUNCTION(BlueprintCallable, Category = RDUICreateGroup)
 		void ModifyPerson();
 
+	/**
+	* Applies the modifications on the Person selected
+	*/
 	UFUNCTION()
 		void ApplyModifyPerson();
 

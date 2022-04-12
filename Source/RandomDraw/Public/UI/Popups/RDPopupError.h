@@ -16,11 +16,16 @@ class RANDOMDRAW_API URDPopupError : public URDPopupBase
 	
 public:
 
+	/**
+	* Initialize the popup value
+	* @param _Message - Message displayed
+	*/
 	UFUNCTION()
 	void InitPopupValue(FString _Message);
 
 protected:
 
+	/* Message displayed on the popup */
 	UPROPERTY(BlueprintReadWrite, Category = PopupError)
 	FString m_PopupMessage = "";
 

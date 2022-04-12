@@ -20,14 +20,27 @@ class RANDOMDRAW_API ARDHUD : public AHUD
 	
 public:
 
-	/* Display an oter UI on the screen */
+	/** 
+	* Display an oter UI on the screen 
+	* @param _PopupUI - Menu UI Type
+	* @param _UIPriority - UI Priority
+	* @return a boolean value if the instantiation was successful or not
+	*/
 	UFUNCTION()
 	bool DisplayAnOtherUI(ERDMenuStat _MenuStat, ERDUIPriority _UIPriority);
 	
-	/* Display an Popup on the screen */
+	/**
+	* Display an Popup on the screen 
+	* @param _PopupUI - Popup UI Type
+	* @param _UIPriority - UI Priority
+	*/
 	UFUNCTION()
 	void DisplayPopupUI(ERDPopupUI _PopupUI, ERDUIPriority _UIPriority);
 
+	/**
+	* getter for the reference of the current popup display
+	* @return the reference of the current popup display
+	*/
 	inline URDUIBase* GetPopupInstance() { return m_PopupInstance->m_Instance; }
 
 protected:
@@ -43,6 +56,7 @@ protected:
 	/* Reference of the current UI displayed */
 	FRDUIInstance* m_UIInstance = nullptr;
 
+	/* Reference of the current Popup displayed */
 	FRDUIInstance* m_PopupInstance = nullptr;
 
 };

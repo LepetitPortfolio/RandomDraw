@@ -16,7 +16,13 @@ class RANDOMDRAW_API URDGameInstance : public UPlatformGameInstance
 	
 protected:
 
+	/**
+	* UE4 Function : Initilizes the Game instance 
+	*/
 	virtual void Init() override;
 
+	/**
+	* UE4 Function : stop all dependence of the Game instance
+	*/
 	virtual void Shutdown() override;
 };

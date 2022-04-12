@@ -10,7 +10,7 @@ void URDWidgetColorLineSelector::InitValues(FLinearColor _Color, class URDWidget
 	m_ColorSelector = _ColorSelector;
 }
 
-void URDWidgetColorLineSelector::Select()
+void URDWidgetColorLineSelector::SelectColor()
 {
 	m_ColorSelector->ChangeColorSelected(m_Color);
 }

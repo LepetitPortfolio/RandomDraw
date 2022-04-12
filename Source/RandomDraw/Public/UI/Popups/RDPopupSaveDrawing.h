@@ -16,16 +16,24 @@ class RANDOMDRAW_API URDPopupSaveDrawing : public URDPopupBase
 
 public:
 
+	/**
+	* Launch the drawing save process 
+	*/
 	UFUNCTION(BlueprintCallable, Category = PopupSaveDrawing)
 		void SaveDrawing();
 
 protected:
 	
+	/* Save name */
 	UPROPERTY(BlueprintReadWrite, Category = PopupSaveDrawing)
 		FString m_SaveName = "";
 
-
+	/**
+	* UE4 Function : Called when the object is construct
+	*/
 	virtual void NativeOnInitialized() override;
-
+	/**
+	* UE4 Function : Called just before to display the UMG
+	*/
 	virtual void NativeConstruct() override;
 };

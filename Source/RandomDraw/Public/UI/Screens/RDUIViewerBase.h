@@ -19,14 +19,20 @@ class RANDOMDRAW_API URDUIViewerBase : public URDUIBase
 
 protected:
 
+	/* Widget template to instantiate */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RDUIViewerBase")
 	TSubclassOf<URDWidgetBase> m_WidgetTemplate;
 
+	/* Reference of the Scroll box widget */
 	UPROPERTY(BlueprintReadOnly, Category = "RDUIViewerBase", meta = (BindWidget))
 	UScrollBox* m_ScrollBox = nullptr;
 	
+	/* Reference of the vertical box widget */
 	UPROPERTY(BlueprintReadOnly, Category = "RDUIViewerBase", meta = (BindWidget))
 	UVerticalBox* m_WidgetList = nullptr;
 
+	/**
+	* Pure virtual function used for initialize the scroll box 
+	*/
 	virtual void InitScrollBox() PURE_VIRTUAL(URDUIViewerBase::InitScrollBox, ;);
 };

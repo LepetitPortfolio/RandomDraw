@@ -16,11 +16,18 @@ class RANDOMDRAW_API URDPopupBase : public URDUIBase
 	
 protected:
 
-
+	/**
+	* UE4 Function : Called when the object is construct
+	*/
 	virtual void NativeOnInitialized() override;
-
+	/**
+	* UE4 Function : Called just before to display the UMG
+	*/
 	virtual void NativeConstruct() override;
 
+	/**
+	* Remove the popup
+	*/
 	UFUNCTION(BlueprintCallable, Category = PopupBase)
 		void ClosePopup();
 };
