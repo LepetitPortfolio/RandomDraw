@@ -3,8 +3,11 @@
 
 #include "UI/Widgets/RDWidgetRandomDrawLine.h"
 #include "FunctionLibrary/RDFunctionLibrary.h"
+#include "System/RDHUD.h"
 #include "UI/Screens/RDUIViewerRandomDraws.h"
+#include "UI/Widgets/RDDrawScreenWidget.h"
 #include "Managers/RDRandomDrawManager.h"
+#include "Managers/RDScreenshotManager.h"
 
 void URDWidgetRandomDrawLine::InitValue(FRDRandomDraw* _RandomDraw, FString _RandomDrawID, URDUIViewerRandomDraws* _ViewerRandomDraws)
 {
@@ -41,4 +44,16 @@ void URDWidgetRandomDrawLine::ShowRandomDraw()
 {
 	URDFunctionLibrary::GetRandomDrawManager()->SetRandomDrawView(m_RandomDraw);
 	URDFunctionLibrary::ChangeMenuState(ERDMenuStat::RandomDrawViewer);
+}
+
+void URDWidgetRandomDrawLine::ShareRandomDraw()
+{
+	URDDrawScreenWidget* drawScreen = URDFunctionLibrary::GetRDHUD()->GetDrawScreen();
+
+	drawScreen->GenerateRandomDrawList(m_RandomDraw);
+	
+	UTextureRenderTarget2D* inRenderTarget = URDFunctionLibrary::GetScreenshotManager()->RenderWidgetToTexture(false, TextureFilter::TF_Default, drawScreen, drawScreen->GetDesiredSize(), 0);
+
+	URDFunctionLibrary::GetScreenshotManager()->SaveRenderTargetToDisk(inRenderTarget, FPaths::ScreenShotDir()+ m_RandomDraw->m_Libelle);
+
 }

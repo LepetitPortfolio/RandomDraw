@@ -5,8 +5,10 @@
 #include "Kismet/GameplayStatics.h"
 #include "FunctionLibrary/RDFunctionLibrary.h"
 #include "System/RandomDrawGameMode.h"
+#include "System/RDHUD.h"
 #include "Components/ScrollBox.h"
 #include "Managers/RDRandomDrawManager.h"
+#include "UI/Widgets/RDDrawScreenWidget.h"
 #include "UI/Widgets/RDWidgetDrawLine.h"
 
 
@@ -23,14 +25,13 @@ void URDUIRandomDrawViewer::NativeConstruct()
 
 	InitScrollBox();
 
+	URDFunctionLibrary::GetRDHUD()->GetDrawScreen()->GenerateRandomDrawList(m_RandomDraw);
 
 	Super::NativeConstruct();
 }
 
 void URDUIRandomDrawViewer::InitScrollBox()
 {
-
-
 	m_WidgetList->ClearChildren();
 
 	TArray<FRDDraw>* draws = &m_RandomDraw->m_Draws;

@@ -77,6 +77,13 @@ public:
 		inline class URDRandomDrawManager* GetRandomDrawManager() { return m_RandomDrawManager; }
 
 	/**
+	* return a reference of screenshot manager
+	* @return the reference of screenshot manager
+	*/
+	UFUNCTION()
+		inline class URDScreenshotManager* GetScreenshotManager() { return m_ScreenshotManager; }
+
+	/**
 	* return the referenc of appdata
 	* @return referenc of appdata
 	*/
@@ -87,6 +94,8 @@ public:
 	* @param _NewAppData - new appdata reference
 	*/
 	void SetAppData(FRDAppData* _NewAppData);
+
+	inline class ARDHUD* GetRDHUD() { return m_RDHUD; }
 
 protected:
 
@@ -118,6 +127,10 @@ protected:
 	/* Manager to managing all Random draw data */
 	UPROPERTY(BlueprintReadOnly, Category = RDGameMode)
 		class URDRandomDrawManager* m_RandomDrawManager = nullptr;
+
+	/* Manager to managing the Screenshots */
+	UPROPERTY(BlueprintReadOnly, Category = RDGameMode)
+		class URDScreenshotManager* m_ScreenshotManager = nullptr;
 
 	/* History of menu stat displayed */
 	UPROPERTY(BlueprintReadOnly, Category = RDGameMode)

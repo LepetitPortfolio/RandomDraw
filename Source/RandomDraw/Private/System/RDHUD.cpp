@@ -48,3 +48,14 @@ void ARDHUD::DisplayPopupUI(ERDPopupUI _PopupUI, ERDUIPriority _UIPriority)
 		m_PopupInstance = popupInstance;
 	}
 }
+
+URDDrawScreenWidget* ARDHUD::GetDrawScreen()
+{
+
+	if (!m_DrawScreen)
+	{
+		m_DrawScreen = CreateWidget<URDDrawScreenWidget>(UGameplayStatics::GetPlayerController(this, 0), m_DrawScreenTemplate);
+	}
+
+	return m_DrawScreen;
+}

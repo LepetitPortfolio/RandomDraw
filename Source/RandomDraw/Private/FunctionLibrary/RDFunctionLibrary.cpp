@@ -7,7 +7,10 @@
 #include "Managers/RDSaveManager.h"
 #include "Managers/RDGroupManager.h"
 #include "Managers/RDPersonManager.h"
+#include "Managers/RDScreenshotManager.h"
 #include "System/RandomDrawGameMode.h"
+
+
 
 ARandomDrawGameMode* URDFunctionLibrary::m_GameMode = nullptr;
 
@@ -33,6 +36,18 @@ ARandomDrawGameMode* URDFunctionLibrary::GetRDGameMode()
 void URDFunctionLibrary::ResetGameMode()
 {
 	m_GameMode = nullptr;
+}
+
+ARDHUD* URDFunctionLibrary::GetRDHUD()
+{
+	ARandomDrawGameMode* gm = GetRDGameMode();
+
+	if (gm)
+	{
+		return gm->GetRDHUD();
+	}
+
+	return nullptr;
 }
 
 URDPersonManager* URDFunctionLibrary::GetPersonManager()
@@ -66,6 +81,18 @@ URDRandomDrawManager* URDFunctionLibrary::GetRandomDrawManager()
 	if (gm)
 	{
 		return gm->GetRandomDrawManager();
+	}
+
+	return nullptr;
+}
+
+URDScreenshotManager* URDFunctionLibrary::GetScreenshotManager()
+{
+	ARandomDrawGameMode* gm = GetRDGameMode();
+
+	if (gm)
+	{
+		return gm->GetScreenshotManager();
 	}
 
 	return nullptr;

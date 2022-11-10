@@ -33,6 +33,9 @@ public:
 	UFUNCTION()
 	static void ResetGameMode();
 
+	UFUNCTION()
+	static class ARDHUD* GetRDHUD();
+
 	/** 
 	* Getter of the Person Manager
 	* @return the reference of Person Manager
@@ -49,10 +52,17 @@ public:
 
 	/**
 	* Getter of the Random draw Manager 
-	* @return the reference of draw Manager Manager
+	* @return the reference of Random draw Manager
 	*/
 	UFUNCTION(BlueprintPure, Category = RDFunctionLibrary)
 	static class URDRandomDrawManager* GetRandomDrawManager();
+
+	/**
+	* Getter of the Screenshot Manager
+	* @return the reference of Screenshot Manager
+	*/
+	UFUNCTION(BlueprintPure, Category = RDFunctionLibrary)
+	static class URDScreenshotManager* GetScreenshotManager();
 
 	/** 
 	* Launch the process for save the data 
@@ -120,7 +130,6 @@ public:
 	* @return group reference of group searched
 	*/
 	static FRDGroup* GetGroup(FString _GroupID);
-
 
 private:
 

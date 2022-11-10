@@ -8,6 +8,7 @@
 #include "Managers/RDGroupManager.h"
 #include "Managers/RDPersonManager.h"
 #include "Managers/RDSaveManager.h"
+#include "Managers/RDScreenshotManager.h"
 #include "Managers/RDRandomDrawManager.h"
 #include "System/RDHUD.h"
 
@@ -90,6 +91,7 @@ void ARandomDrawGameMode::BeginPlay()
 	m_PersonManager = NewObject<URDPersonManager>();
 	m_SaveManager = NewObject<URDSaveManager>();
 	m_RandomDrawManager = NewObject<URDRandomDrawManager>();
+	m_ScreenshotManager = NewObject<URDScreenshotManager>();
 	m_AppData = FRDAppData();
 
 	if (!m_SaveManager->LoadData())

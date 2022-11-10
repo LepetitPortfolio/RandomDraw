@@ -8,6 +8,7 @@
 #include "Enums/RDPopupUI.h"
 #include "Enums/RDUIPriority.h"
 #include "Structs/RDUIInstance.h"
+#include "UI/Widgets/RDDrawScreenWidget.h"
 #include "RDHUD.generated.h"
 
 /**
@@ -43,6 +44,8 @@ public:
 	*/
 	inline URDUIBase* GetPopupInstance() { return m_PopupInstance->m_Instance; }
 
+	URDDrawScreenWidget* GetDrawScreen();
+
 protected:
 
 	/* List of UI for the application */
@@ -59,4 +62,10 @@ protected:
 	/* Reference of the current Popup displayed */
 	FRDUIInstance* m_PopupInstance = nullptr;
 
+	/* UI Template */
+	UPROPERTY(EditDefaultsOnly, Category = RDHUD)
+		TSubclassOf<URDDrawScreenWidget> m_DrawScreenTemplate;
+
+	UPROPERTY()
+		URDDrawScreenWidget* m_DrawScreen;
 };
