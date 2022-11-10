@@ -58,4 +58,7 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = RDUIViewerRandomDraws)
 		void ShowRandomDraw();
 
+	UFUNCTION(BlueprintCallable, Category = RDUIViewerRandomDraws)
+		void ShareRandomDraw();
+
 };

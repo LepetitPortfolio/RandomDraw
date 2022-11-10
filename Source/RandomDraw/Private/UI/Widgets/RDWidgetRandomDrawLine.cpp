@@ -46,6 +46,7 @@ void URDWidgetRandomDrawLine::ShowRandomDraw()
 	URDFunctionLibrary::ChangeMenuState(ERDMenuStat::RandomDrawViewer);
 }
 
+
 void URDWidgetRandomDrawLine::ShareRandomDraw()
 {
 	URDDrawScreenWidget* drawScreen = URDFunctionLibrary::GetRDHUD()->GetDrawScreen();
