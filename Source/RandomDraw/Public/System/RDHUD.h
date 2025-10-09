@@ -44,6 +44,7 @@ public:
 	*/
 	inline URDUIBase* GetPopupInstance() { return m_PopupInstance->m_Instance; }
 
+	UFUNCTION()
 	URDDrawScreenWidget* GetDrawScreen();
 
 protected:
@@ -67,5 +68,5 @@ protected:
 		TSubclassOf<URDDrawScreenWidget> m_DrawScreenTemplate;
 
 	UPROPERTY()
-		URDDrawScreenWidget* m_DrawScreen;
+		URDDrawScreenWidget* m_DrawScreen = nullptr;
 };

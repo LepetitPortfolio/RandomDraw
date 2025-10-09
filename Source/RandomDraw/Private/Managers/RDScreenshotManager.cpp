@@ -2,62 +2,82 @@
 
 
 #include "Managers/RDScreenshotManager.h"
-#include "HighResScreenshot.h"
-#include "ImageWriteTask.h"
-#include "ImagePixelData.h"
-#include "ImageWriteQueue.h"
+#include "Engine/Texture2D.h"
+#include "IImageWrapper.h"
+#include "IImageWrapperModule.h"
+#include "Modules/ModuleManager.h"
+#include "Misc/FileHelper.h"
+#include "HAL/PlatformFilemanager.h"
+#include "Structs/RDRandomDraw.h"
+
+#include "Blueprint/WidgetBlueprintLibrary.h"
+#include "Engine/TextureRenderTarget2D.h"
 #include "Slate/WidgetRenderer.h"
+#include "Engine/World.h"
 
-UTextureRenderTarget2D* URDScreenshotManager::RenderWidgetToTexture(bool _UseGamma, TextureFilter _Filter, UUserWidget* _WidgetToRender, FVector2D _DrawSize, float _DeltaTime)
+#include "FunctionLibrary/RDFunctionLibrary.h"
+#include "System/RDHUD.h"
+
+
+bool  URDScreenshotManager::TakeScreenshotOfRandomDraw(FRDRandomDraw _RandomDraw)
 {
-	if (!_WidgetToRender)
+	ARDHUD* hud =URDFunctionLibrary::GetRDHUD();
+
+	if (!hud)
 	{
-		return nullptr;
+		return false;
 	}
 
-	if (_DrawSize.IsZero())
+	URDDrawScreenWidget* drawScreen = hud->GetDrawScreen();
+
+	if (!drawScreen)
 	{
-		return nullptr;
+		return false;
 	}
 
-	FWidgetRenderer widgetRenderer = FWidgetRenderer(_UseGamma);
-	UTextureRenderTarget2D* textureRender = widgetRenderer.CreateTargetFor(_DrawSize, _Filter, _UseGamma);
-	TSharedRef<SWidget> ref = _WidgetToRender->TakeWidget();
+	drawScreen->GenerateRandomDrawList(&_RandomDraw);
 
-	widgetRenderer.DrawWidget(textureRender, ref, _DrawSize, _DeltaTime);
+	FString filePath = FString(FPaths::ScreenShotDir() + _RandomDraw.m_Libelle + "_" + FDateTime::Now().ToString(TEXT("%Y%m%d%H%M%S")) + ".png");
 
-	return textureRender;
+	return SaveWidgetAsPNG(drawScreen, filePath, drawScreen->GetDrawScreenSize());
 }
 
-void URDScreenshotManager::SaveRenderTargetToDisk(UTextureRenderTarget2D* _InRenderTarget, FString _Filename)
+bool URDScreenshotManager::SaveWidgetAsPNG(UUserWidget* _Widget, const FString& _FilePath, FVector2D _Size)
 {
-	FTextureRenderTargetResource* textureRenderResource = _InRenderTarget->GameThread_GetRenderTargetResource();
+	if (!_Widget) return false;
 
-	FReadSurfaceDataFlags readPixelFlags(RCM_UNorm);
-	readPixelFlags.SetLinearToGamma(true);
+	// Crée un renderTarget
+	UTextureRenderTarget2D* renderTarget = NewObject<UTextureRenderTarget2D>();
+	renderTarget->InitCustomFormat(_Size.X, _Size.Y, PF_B8G8R8A8, false);
+	renderTarget->ClearColor = FLinearColor::Transparent;
 
-	TArray<FLinearColor> outBMP;
-	textureRenderResource->ReadLinearColorPixels(outBMP, readPixelFlags);
+	// Render du widget
+	FWidgetRenderer renderer(true);
+	renderer.DrawWidget(renderTarget, _Widget->TakeWidget(), _Size, 0.f);
 
-	FIntRect sourceRect;
-	FIntPoint destSize(_InRenderTarget->GetSurfaceWidth(), _InRenderTarget->GetSurfaceHeight());
+	// Lire les pixels
+	TArray<FColor> pixels;
+	FRenderTarget* renderTargetResource = renderTarget->GameThread_GetRenderTargetResource();
+	renderTargetResource->ReadPixels(pixels);
 
-	FString resultPath;
-	FHighResScreenshotConfig& highResScreenshotConfig = GetHighResScreenshotConfig();
+	// Sauvegarde en PNG (utilise la fonction précédente)
+	return SaveCustomPixelsAsImage(pixels, _Size.X, _Size.Y, _FilePath, true);
+}
 
-	TUniquePtr<FImageWriteTask> imageTask = MakeUnique<FImageWriteTask>();
+// Génère une image à partir d'un tableau de pixels
+bool URDScreenshotManager::SaveCustomPixelsAsImage(const TArray<FColor>& _Pixels, int32 _Width, int32 _Height, const FString& _FilePath, bool _AsPNG)
+{
+	if (_Pixels.Num() != _Width * _Height) return false;
 
-	imageTask->PixelData = MakeUnique<TImagePixelData<FLinearColor>>(destSize, (TArray<FLinearColor, FDefaultAllocator64>) MoveTemp(outBMP));
+	IImageWrapperModule& imageWrapperModule = FModuleManager::LoadModuleChecked<IImageWrapperModule>("ImageWrapper");
+	EImageFormat format = _AsPNG ? EImageFormat::PNG : EImageFormat::JPEG;
+	TSharedPtr<IImageWrapper> imageWrapper = imageWrapperModule.CreateImageWrapper(format);
 
-	highResScreenshotConfig.PopulateImageTaskParams(*imageTask);
-	imageTask->Filename = _Filename;
-
-	imageTask->Format = EImageFormat::JPEG;
-
-	TFuture<bool> completionFuture = highResScreenshotConfig.ImageWriteQueue->Enqueue(MoveTemp(imageTask));
-
-	if (completionFuture.IsValid())
+	if ((imageWrapper.IsValid()) && (imageWrapper->SetRaw(_Pixels.GetData(), _Pixels.Num() * sizeof(FColor), _Width, _Height, ERGBFormat::BGRA, 8)))
 	{
-		completionFuture.Wait();
+		const TArray64<uint8>& compressedData = imageWrapper->GetCompressed(100);
+		return FFileHelper::SaveArrayToFile(compressedData, *_FilePath);
 	}
+
+	return false;
 }

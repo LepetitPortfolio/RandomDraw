@@ -34,3 +34,14 @@ void URDWidgetDrawLine::InitValue(FRDDraw* _Draw)
 
 
 }
+
+FVector2D URDWidgetDrawLine::GetDrawLineSize()
+{
+	FVector2D drawLineSize = FVector2D();
+	if (m_WidgetChildRoot)
+	{
+		drawLineSize = FVector2D(m_WidgetChildRoot->WidthOverride, m_WidgetChildRoot->HeightOverride);
+	}
+
+	return drawLineSize;
+}

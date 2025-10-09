@@ -98,6 +98,18 @@ URDScreenshotManager* URDFunctionLibrary::GetScreenshotManager()
 	return nullptr;
 }
 
+bool URDFunctionLibrary::LaunchTakeScreenshotOfRandomDraw(FRDRandomDraw _RandomDraw)
+{
+	URDScreenshotManager* sm = GetScreenshotManager();
+
+	if (sm)
+	{
+		return sm->TakeScreenshotOfRandomDraw(_RandomDraw);
+	}
+
+	return false;
+}
+
 void URDFunctionLibrary::LaunchSaveData()
 {
 	ARandomDrawGameMode* gm = GetRDGameMode();

@@ -33,6 +33,10 @@ public:
 	UFUNCTION()
 	static void ResetGameMode();
 
+	/**
+	* Getter of the HUD 
+	* @return the reference of HUD
+	*/
 	UFUNCTION()
 	static class ARDHUD* GetRDHUD();
 
@@ -63,6 +67,13 @@ public:
 	*/
 	UFUNCTION(BlueprintPure, Category = RDFunctionLibrary)
 	static class URDScreenshotManager* GetScreenshotManager();
+
+	/**
+	* Launch the process to take a screen shot of the Random draw in input
+	* @param _RandomDraw - Random draw data to take screen shot
+	*/
+	UFUNCTION(BlueprintPure, Category = RDFunctionLibrary)
+	static bool LaunchTakeScreenshotOfRandomDraw(FRDRandomDraw _RandomDraw);
 
 	/** 
 	* Launch the process for save the data 

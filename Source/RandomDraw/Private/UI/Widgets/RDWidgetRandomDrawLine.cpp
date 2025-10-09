@@ -4,6 +4,7 @@
 #include "UI/Widgets/RDWidgetRandomDrawLine.h"
 #include "FunctionLibrary/RDFunctionLibrary.h"
 #include "System/RDHUD.h"
+#include "UI/Popups/RDPopupConfirmeAction.h"
 #include "UI/Screens/RDUIViewerRandomDraws.h"
 #include "UI/Widgets/RDDrawScreenWidget.h"
 #include "Managers/RDRandomDrawManager.h"
@@ -49,12 +50,6 @@ void URDWidgetRandomDrawLine::ShowRandomDraw()
 
 void URDWidgetRandomDrawLine::ShareRandomDraw()
 {
-	URDDrawScreenWidget* drawScreen = URDFunctionLibrary::GetRDHUD()->GetDrawScreen();
-
-	drawScreen->GenerateRandomDrawList(m_RandomDraw);
-	
-	UTextureRenderTarget2D* inRenderTarget = URDFunctionLibrary::GetScreenshotManager()->RenderWidgetToTexture(false, TextureFilter::TF_Default, drawScreen, drawScreen->GetDesiredSize(), 0);
-
-	URDFunctionLibrary::GetScreenshotManager()->SaveRenderTargetToDisk(inRenderTarget, FPaths::ScreenShotDir()+ m_RandomDraw->m_Libelle);
+	URDFunctionLibrary::GetScreenshotManager()->TakeScreenshotOfRandomDraw(m_RandomDraw);
 
 }
