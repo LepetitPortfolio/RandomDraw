@@ -72,18 +72,19 @@ void URDShareManager::AndroidShareImage(const FString& _ImagePath, const FString
         jstring Path = Env->NewStringUTF(TCHAR_TO_UTF8(*_ImagePath));
         jobject FileObj = Env->NewObject(FileClass, FileCtor, Path);
 
+        // ⚠️ UNE SEULE déclaration de Activity / ActivityClass
         jobject Activity = FAndroidApplication::GetGameActivityThis();
         jclass ActivityClass = Env->GetObjectClass(Activity);
+
+        // Package name via JNI (compatible UE 4.27)
+        jmethodID GetPackageNameMID = Env->GetMethodID(ActivityClass, "getPackageName", "()Ljava/lang/String;");
+        jstring PkgJ = (jstring)Env->CallObjectMethod(Activity, GetPackageNameMID);
+        const char* PkgChars = Env->GetStringUTFChars(PkgJ, nullptr);
+        FString Authority = FString::Printf(TEXT("%s.fileprovider"), UTF8_TO_TCHAR(PkgChars));
+        Env->ReleaseStringUTFChars(PkgJ, PkgChars);
 
         jclass FileProviderClass = Env->FindClass("androidx/core/content/FileProvider");
         jmethodID GetUri = Env->GetStaticMethodID(FileProviderClass, "getUriForFile", "(Landroid/content/Context;Ljava/lang/String;Ljava/io/File;)Landroid/net/Uri;");
-        
-        jobject Activity = FAndroidApplication::GetGameActivityThis();
-        jclass ActivityClass = Env->GetObjectClass(Activity);
-        jmethodID GetPackageNameMID = Env->GetMethodID(ActivityClass, "getPackageName", "()Ljava/lang/String;");
-        jstring PkgJ = (jstring)Env->CallObjectMethod(Activity, GetPackageNameMID);
-        FString Authority = FString::Printf(TEXT("%s.fileprovider"), UTF8_TO_TCHAR(Env->GetStringUTFChars(PkgJ, nullptr)));
-
         jstring AuthorityJ = Env->NewStringUTF(TCHAR_TO_UTF8(*Authority));
         jobject UriObj = Env->CallStaticObjectMethod(FileProviderClass, GetUri, Activity, AuthorityJ, FileObj);
 
@@ -109,7 +110,8 @@ void URDShareManager::AndroidShareImage(const FString& _ImagePath, const FString
         Env->CallObjectMethod(IntentObj, AddFlags, 0x00000001); // FLAG_GRANT_READ_URI_PERMISSION
 
         jmethodID CreateChooser = Env->GetStaticMethodID(IntentClass, "createChooser", "(Landroid/content/Intent;Ljava/lang/CharSequence;)Landroid/content/Intent;");
-        jobject Chooser = Env->CallStaticObjectMethod(IntentClass, CreateChooser, IntentObj, Env->NewStringUTF(TEXT("Partager le résultat 🎁")));
+        // ⚠️ fix char16_t → UTF-8
+        jobject Chooser = Env->CallStaticObjectMethod(IntentClass, CreateChooser, IntentObj, Env->NewStringUTF(TCHAR_TO_UTF8(TEXT("Partager le résultat 🎁"))));
 
         jmethodID StartActivity = Env->GetMethodID(ActivityClass, "startActivity", "(Landroid/content/Intent;)V");
         Env->CallVoidMethod(Activity, StartActivity, Chooser);
