@@ -25,9 +25,11 @@
 
     <!-- androidx.core dependency for FileProvider -->
     <gradleProperties>
-        <insertNewAttributeIn Gradle:dependencies>
+        <insertNewAttributeIn Gradle="dependencies">
             implementation 'androidx.core:core:1.6.0'
         </insertNewAttributeIn>
+        <insertNew>android.useAndroidX=true</insertNew>
+        <insertNew>android.enableJetifier=true</insertNew>
     </gradleProperties>
 
 </root>
