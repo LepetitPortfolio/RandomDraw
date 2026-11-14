@@ -77,7 +77,13 @@ void URDShareManager::AndroidShareImage(const FString& _ImagePath, const FString
 
         jclass FileProviderClass = Env->FindClass("androidx/core/content/FileProvider");
         jmethodID GetUri = Env->GetStaticMethodID(FileProviderClass, "getUriForFile", "(Landroid/content/Context;Ljava/lang/String;Ljava/io/File;)Landroid/net/Uri;");
-        FString Authority = FString::Printf(TEXT("%s.fileprovider"), *FAndroidMisc::GetPackageName());
+        
+        jobject Activity = FAndroidApplication::GetGameActivityThis();
+        jclass ActivityClass = Env->GetObjectClass(Activity);
+        jmethodID GetPackageNameMID = Env->GetMethodID(ActivityClass, "getPackageName", "()Ljava/lang/String;");
+        jstring PkgJ = (jstring)Env->CallObjectMethod(Activity, GetPackageNameMID);
+        FString Authority = FString::Printf(TEXT("%s.fileprovider"), UTF8_TO_TCHAR(Env->GetStringUTFChars(PkgJ, nullptr)));
+
         jstring AuthorityJ = Env->NewStringUTF(TCHAR_TO_UTF8(*Authority));
         jobject UriObj = Env->CallStaticObjectMethod(FileProviderClass, GetUri, Activity, AuthorityJ, FileObj);
 
