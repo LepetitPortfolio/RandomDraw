@@ -43,6 +43,8 @@ protected:
 	* Function to share the random dawn displayed
 	*/
 	UFUNCTION(BlueprintCallable, Category = RDUIPersonManager)
-		void ShareDraw();
+	void ShareDraw();
+
+
 	
 };

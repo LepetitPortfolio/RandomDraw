@@ -10,7 +10,9 @@
 #include "Managers/RDSaveManager.h"
 #include "Managers/RDScreenshotManager.h"
 #include "Managers/RDRandomDrawManager.h"
+#include "Managers/RDShareManager.h"
 #include "System/RDHUD.h"
+#include "RandomDraw.h"
 
 void ARandomDrawGameMode::ChangeMenuState(ERDMenuStat _MenuStat, ERDUIPriority _UIPriority)
 {
@@ -92,6 +94,7 @@ void ARandomDrawGameMode::BeginPlay()
 	m_SaveManager = NewObject<URDSaveManager>();
 	m_RandomDrawManager = NewObject<URDRandomDrawManager>();
 	m_ScreenshotManager = NewObject<URDScreenshotManager>();
+	m_ShareManager = NewObject<URDShareManager>();
 	m_AppData = FRDAppData();
 
 	if (!m_SaveManager->LoadData())

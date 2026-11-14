@@ -69,11 +69,18 @@ public:
 	static class URDScreenshotManager* GetScreenshotManager();
 
 	/**
+	* Getter of the Share Manager
+	* @return the reference of Share Manager
+	*/
+	UFUNCTION(BlueprintPure, Category = RDFunctionLibrary)
+	static class URDShareManager* GetShareManager();
+
+	/**
 	* Launch the process to take a screen shot of the Random draw in input
 	* @param _RandomDraw - Random draw data to take screen shot
 	*/
 	UFUNCTION(BlueprintPure, Category = RDFunctionLibrary)
-	static bool LaunchTakeScreenshotOfRandomDraw(FRDRandomDraw _RandomDraw);
+	static FString LaunchTakeScreenshotOfRandomDraw(FRDRandomDraw _RandomDraw);
 
 	/** 
 	* Launch the process for save the data 

@@ -98,7 +98,19 @@ URDScreenshotManager* URDFunctionLibrary::GetScreenshotManager()
 	return nullptr;
 }
 
-bool URDFunctionLibrary::LaunchTakeScreenshotOfRandomDraw(FRDRandomDraw _RandomDraw)
+URDShareManager* URDFunctionLibrary::GetShareManager()
+{
+	ARandomDrawGameMode* gm = GetRDGameMode();
+
+	if (gm)
+	{
+		return gm->GetShareManager();
+	}
+
+	return nullptr;
+}
+
+FString URDFunctionLibrary::LaunchTakeScreenshotOfRandomDraw(FRDRandomDraw _RandomDraw)
 {
 	URDScreenshotManager* sm = GetScreenshotManager();
 
@@ -107,7 +119,7 @@ bool URDFunctionLibrary::LaunchTakeScreenshotOfRandomDraw(FRDRandomDraw _RandomD
 		return sm->TakeScreenshotOfRandomDraw(_RandomDraw);
 	}
 
-	return false;
+	return FString();
 }
 
 void URDFunctionLibrary::LaunchSaveData()

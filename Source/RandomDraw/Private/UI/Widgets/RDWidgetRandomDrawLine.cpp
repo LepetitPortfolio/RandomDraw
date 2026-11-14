@@ -9,6 +9,7 @@
 #include "UI/Widgets/RDDrawScreenWidget.h"
 #include "Managers/RDRandomDrawManager.h"
 #include "Managers/RDScreenshotManager.h"
+#include "Managers/RDShareManager.h"
 
 void URDWidgetRandomDrawLine::InitValue(FRDRandomDraw* _RandomDraw, FString _RandomDrawID, URDUIViewerRandomDraws* _ViewerRandomDraws)
 {
@@ -50,6 +51,5 @@ void URDWidgetRandomDrawLine::ShowRandomDraw()
 
 void URDWidgetRandomDrawLine::ShareRandomDraw()
 {
-	URDFunctionLibrary::GetScreenshotManager()->TakeScreenshotOfRandomDraw(m_RandomDraw);
-
+	URDFunctionLibrary::GetShareManager()->SetRandomDrawIDInWait(m_RandomDraw);
 }

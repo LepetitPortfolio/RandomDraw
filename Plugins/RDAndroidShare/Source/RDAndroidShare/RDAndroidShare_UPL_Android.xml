@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- FileProvider declaration -->
+    <androidManifestUpdates>
+        <addElements tag="application">
+            <provider
+                android:name="androidx.core.content.FileProvider"
+                android:authorities="${applicationid}.fileprovider"
+                android:exported="false"
+                android:grantUriPermissions="true">
+                <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/file_paths" />
+            </provider>
+        </addElements>
+    </androidManifestUpdates>
+
+    <!-- Inject file_paths.xml -->
+    <resourceCopies>
+        <copyFile
+            src="$S(PluginDir)/Source/RDAndroidShare/file_paths.xml"
+            dst="$S(BuildDir)/res/xml/file_paths.xml" />
+    </resourceCopies>
+
+    <!-- androidx.core dependency for FileProvider -->
+    <gradleProperties>
+        <insertNewAttributeIn Gradle:dependencies>
+            implementation 'androidx.core:core:1.6.0'
+        </insertNewAttributeIn>
+    </gradleProperties>
+
+</root>

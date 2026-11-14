@@ -13,6 +13,7 @@ enum class ERDPopupUI : uint8
 	None,
 	ErrorPopup,
 	SaveDrawingPopup,
+	ShareDrawingPopup,
 	ValidateActionPopup,
 	Max		UMETA(Hidden)
 };

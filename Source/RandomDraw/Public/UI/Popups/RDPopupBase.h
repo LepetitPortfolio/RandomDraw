@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "UI/Widgets/RDWidgetBase.h"
+#include "UI/Screens/RDUIBase.h"
 #include "RDPopupBase.generated.h"
 
 /**
@@ -29,5 +29,5 @@ protected:
 	* Remove the popup
 	*/
 	UFUNCTION(BlueprintCallable, Category = PopupBase)
-		void ClosePopup();
+	virtual void ClosePopup();
 };

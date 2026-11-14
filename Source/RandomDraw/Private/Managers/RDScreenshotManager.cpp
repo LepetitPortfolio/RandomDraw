@@ -15,31 +15,39 @@
 #include "Slate/WidgetRenderer.h"
 #include "Engine/World.h"
 
+#include "ImageUtils.h"
+#include "HAL/FileManager.h"
+
 #include "FunctionLibrary/RDFunctionLibrary.h"
 #include "System/RDHUD.h"
 
 
-bool  URDScreenshotManager::TakeScreenshotOfRandomDraw(FRDRandomDraw _RandomDraw)
+FString  URDScreenshotManager::TakeScreenshotOfRandomDraw(FRDRandomDraw _RandomDraw)
 {
 	ARDHUD* hud =URDFunctionLibrary::GetRDHUD();
 
 	if (!hud)
 	{
-		return false;
+		return FString();
 	}
 
 	URDDrawScreenWidget* drawScreen = hud->GetDrawScreen();
 
 	if (!drawScreen)
 	{
-		return false;
+		return FString();
 	}
 
 	drawScreen->GenerateRandomDrawList(&_RandomDraw);
 
 	FString filePath = FString(FPaths::ScreenShotDir() + _RandomDraw.m_Libelle + "_" + FDateTime::Now().ToString(TEXT("%Y%m%d%H%M%S")) + ".png");
 
-	return SaveWidgetAsPNG(drawScreen, filePath, drawScreen->GetDrawScreenSize());
+	if (SaveWidgetAsPNG(drawScreen, filePath, drawScreen->GetDrawScreenSize()))
+	{
+		return filePath;
+	}
+
+	return FString();
 }
 
 bool URDScreenshotManager::SaveWidgetAsPNG(UUserWidget* _Widget, const FString& _FilePath, FVector2D _Size)

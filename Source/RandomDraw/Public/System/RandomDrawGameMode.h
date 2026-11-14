@@ -84,6 +84,12 @@ public:
 		inline class URDScreenshotManager* GetScreenshotManager() { return m_ScreenshotManager; }
 
 	/**
+	* return a reference of share manager
+	* @return the reference of share manager
+	*/
+	UFUNCTION()
+	inline class URDShareManager* GetShareManager() { return m_ShareManager; }
+	/**
 	* return the referenc of appdata
 	* @return referenc of appdata
 	*/
@@ -131,6 +137,10 @@ protected:
 	/* Manager to managing the Screenshots */
 	UPROPERTY(BlueprintReadOnly, Category = RDGameMode)
 		class URDScreenshotManager* m_ScreenshotManager = nullptr;
+
+	/* Manager to managing the share */
+	UPROPERTY(BlueprintReadOnly, Category = RDGameMode)
+	class URDShareManager* m_ShareManager = nullptr;
 
 	/* History of menu stat displayed */
 	UPROPERTY(BlueprintReadOnly, Category = RDGameMode)

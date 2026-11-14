@@ -25,8 +25,9 @@ public:
 	* @param _RandomDraw - Random Draw data to make a picture
 	* @return Return a value true or false if the process was sucess or not
 	*/
-	bool TakeScreenshotOfRandomDraw(FRDRandomDraw _RandomDraw);
+	FString TakeScreenshotOfRandomDraw(FRDRandomDraw _RandomDraw);
 
+	
 private:
 	/**
 	* Convert a user widget in png picture file

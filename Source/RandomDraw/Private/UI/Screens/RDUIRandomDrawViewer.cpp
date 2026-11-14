@@ -11,6 +11,7 @@
 #include "UI/Widgets/RDDrawScreenWidget.h"
 #include "UI/Widgets/RDWidgetDrawLine.h"
 #include "Managers/RDScreenshotManager.h"
+#include "Managers/RDShareManager.h"
 
 
 void URDUIRandomDrawViewer::NativeOnInitialized()
@@ -51,5 +52,5 @@ void URDUIRandomDrawViewer::InitScrollBox()
 
 void URDUIRandomDrawViewer::ShareDraw()
 {
-	URDFunctionLibrary::GetScreenshotManager()->TakeScreenshotOfRandomDraw(m_RandomDraw);
+	URDFunctionLibrary::GetShareManager()->SetRandomDrawIDInWait(m_RandomDraw);
 }
