@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Styling/SlateColor.h"
 #include "RDUIBase.generated.h"
 
 /**
@@ -22,6 +23,25 @@ protected:
 	*/
 	UFUNCTION(BlueprintCallable, Category = UIBase)
 		FColor ReverseColorRGB(FColor _Color);
+
+	
+	UFUNCTION(BlueprintGetter, Category = UIBase)
+		FSlateColor GetSurfaceColor();
+
+	UFUNCTION(BlueprintGetter, Category = UIBase)
+		FSlateColor GetPrimaryColor();
+
+	UFUNCTION(BlueprintGetter, Category = UIBase)
+		FSlateColor GetSecondaryColor();
+
+	UFUNCTION(BlueprintGetter, Category = UIBase)
+		FSlateColor GetTextPrimaryColor();
+
+	UFUNCTION(BlueprintGetter, Category = UIBase)
+		FSlateColor GetTextSecondaryColor();
+
+	UFUNCTION(BlueprintGetter, Category = UIBase)
+		FSlateColor GetDangerColor();
 
 private:
 	/**

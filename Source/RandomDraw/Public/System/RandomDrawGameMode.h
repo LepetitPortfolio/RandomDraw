@@ -89,6 +89,14 @@ public:
 	*/
 	UFUNCTION()
 	inline class URDShareManager* GetShareManager() { return m_ShareManager; }
+
+	/**
+	* return a reference of theme manager
+	* @return the reference of theme manager
+	*/
+	UFUNCTION()
+	inline class URDThemeManager* GetThemeManager() { return m_ThemeManager; }
+
 	/**
 	* return the referenc of appdata
 	* @return referenc of appdata
@@ -141,6 +149,9 @@ protected:
 	/* Manager to managing the share */
 	UPROPERTY(BlueprintReadOnly, Category = RDGameMode)
 	class URDShareManager* m_ShareManager = nullptr;
+
+	UPROPERTY(BlueprintReadOnly, Category = RDGameMode)
+	class URDThemeManager* m_ThemeManager = nullptr;
 
 	/* History of menu stat displayed */
 	UPROPERTY(BlueprintReadOnly, Category = RDGameMode)

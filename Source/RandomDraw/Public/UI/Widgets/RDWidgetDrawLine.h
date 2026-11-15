@@ -54,6 +54,5 @@ protected:
 	/*Color of second persone*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDWidgetPersonLine)
 		FLinearColor m_SecondPersonColor = FLinearColor::Black;
-
 	
 };

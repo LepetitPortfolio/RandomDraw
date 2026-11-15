@@ -76,6 +76,13 @@ public:
 	static class URDShareManager* GetShareManager();
 
 	/**
+	* Getter of the Theme Manager
+	* @return the reference of Theme Manager
+	*/
+	UFUNCTION(BlueprintPure, Category = RDFunctionLibrary)
+	static class URDThemeManager* GetThemeManager();
+
+	/**
 	* Launch the process to take a screen shot of the Random draw in input
 	* @param _RandomDraw - Random draw data to take screen shot
 	*/

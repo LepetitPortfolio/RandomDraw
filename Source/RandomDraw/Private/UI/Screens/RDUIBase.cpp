@@ -2,6 +2,8 @@
 
 
 #include "UI/Screens/RDUIBase.h"
+#include "FunctionLibrary/RDFunctionLibrary.h"
+#include "Managers/RDThemeManager.h"
 
 FColor URDUIBase::ReverseColorRGB(FColor _Color)
 {
@@ -10,6 +12,36 @@ FColor URDUIBase::ReverseColorRGB(FColor _Color)
 	_Color.B = ReverseColor(_Color.B);
 
 	return _Color;
+}
+
+FSlateColor URDUIBase::GetSurfaceColor()
+{
+	return FSlateColor(URDFunctionLibrary::GetThemeManager()->GetCurrentSurfaceColor());
+}
+
+FSlateColor URDUIBase::GetPrimaryColor()
+{
+	return FSlateColor(URDFunctionLibrary::GetThemeManager()->GetCurrentPrimaryColor());
+}
+
+FSlateColor URDUIBase::GetSecondaryColor()
+{
+	return FSlateColor(URDFunctionLibrary::GetThemeManager()->GetCurrentSecondaryColor());
+}
+
+FSlateColor URDUIBase::GetTextPrimaryColor()
+{
+	return FSlateColor(URDFunctionLibrary::GetThemeManager()->GetCurrentTextPrimaryColor());
+}
+
+FSlateColor URDUIBase::GetTextSecondaryColor()
+{
+	return FSlateColor(URDFunctionLibrary::GetThemeManager()->GetCurrentTextSecondaryColor());
+}
+
+FSlateColor URDUIBase::GetDangerColor()
+{
+	return FSlateColor(URDFunctionLibrary::GetThemeManager()->GetCurrentDangerColor());
 }
 
 int URDUIBase::ReverseColor(int _ColorValue)

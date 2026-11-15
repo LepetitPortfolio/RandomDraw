@@ -5,6 +5,7 @@
 #include "RDGroup.h"
 #include "RDPerson.h"
 #include "RDRandomDraw.h"
+#include "RDTheme.h"
 #include "RDAppData.generated.h"
 
 
@@ -30,6 +31,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDAppData)
 	TMap<FString, FRDRandomDraw> m_RandomDraws = TMap<FString, FRDRandomDraw>();
 
+	/* Current Theme */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDAppData)
+	FRDTheme m_CurrentTheme;
+
 	/**
 	* Constructor
 	*/
@@ -42,6 +47,7 @@ public:
 		m_Groups = _AppData->m_Groups;
 		m_Persons = _AppData->m_Persons;
 		m_RandomDraws = _AppData->m_RandomDraws;
+		m_CurrentTheme = _AppData->m_CurrentTheme;
 	}
 	
 	FORCEINLINE void operator=(FRDAppData _Other)
@@ -49,5 +55,6 @@ public:
 		m_Groups = _Other.m_Groups;
 		m_Persons = _Other.m_Persons;
 		m_RandomDraws = _Other.m_RandomDraws;
+		m_CurrentTheme = _Other.m_CurrentTheme;
 	}
 };

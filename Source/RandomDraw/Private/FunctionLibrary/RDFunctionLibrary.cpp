@@ -8,6 +8,7 @@
 #include "Managers/RDGroupManager.h"
 #include "Managers/RDPersonManager.h"
 #include "Managers/RDScreenshotManager.h"
+#include "Managers/RDThemeManager.h"
 #include "System/RandomDrawGameMode.h"
 
 
@@ -105,6 +106,18 @@ URDShareManager* URDFunctionLibrary::GetShareManager()
 	if (gm)
 	{
 		return gm->GetShareManager();
+	}
+
+	return nullptr;
+}
+
+URDThemeManager* URDFunctionLibrary::GetThemeManager()
+{
+	ARandomDrawGameMode* gm = GetRDGameMode();
+
+	if (gm)
+	{
+		return gm->GetThemeManager();
 	}
 
 	return nullptr;
