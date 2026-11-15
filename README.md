@@ -1,221 +1,114 @@
 # RandomDraw
 
-**RandomDraw** est une application mobile développée avec **Unreal Engine 4.27**, permettant d'effectuer simplement des **tirages au sort aléatoires entre plusieurs participants**.
-
-L'objectif du projet est de proposer un outil simple et ludique pour déterminer aléatoirement une personne parmi un groupe.
-
-Par exemple :
-- 🎁 déterminer à qui offrir un cadeau ;
-- 🎄 organiser un tirage de Noël ;
-- 🎲 sélectionner aléatoirement un participant ;
-- 👥 choisir une personne dans un groupe.
+**RandomDraw** est une application mobile développée avec **Unreal Engine 4.27**, permettant de créer des groupes de personnes et d'effectuer des **tirages au sort aléatoires** entre leurs membres.
 
 ---
 
 ## 🎯 Présentation
 
-RandomDraw est un projet personnel réalisé avec **Unreal Engine 4.27**.
+RandomDraw repose sur un principe simple et ludique : organiser des participants en **groupes**, puis tirer au sort aléatoirement l'un d'entre eux.
 
-L'application repose sur un principe volontairement simple : permettre à l'utilisateur de définir un ensemble de participants, puis de sélectionner aléatoirement l'un d'entre eux.
-
-Le projet a également été pensé comme une base pouvant être enrichie par différents systèmes autour du tirage au sort.
-
----
-
-## ✨ Fonctionnalités
-
-### Tirage aléatoire
-
-Le cœur de l'application permet de sélectionner aléatoirement un participant parmi une liste.
-
-### Application mobile
-
-Le projet est configuré pour cibler les plateformes mobiles :
-
-- Android
-- iOS
-
-Les plateformes cibles sont directement définies dans le fichier `RandomDraw.uproject`.
+Exemples d'utilisation :
+- 🎁 déterminer à qui offrir un cadeau ;
+- 🎄 organiser un tirage de Noël (Secret Santa) ;
+- 🎲 sélectionner un gagnant dans un groupe ;
+- 👥 désigner une personne au hasard pour une tâche.
 
 ---
 
-## 🛠️ Technologies utilisées
+## ✨ Fonctionnalités implémentées
 
-| Technologie | Utilisation |
+### 👥 Gestion des personnes
+- Création et modification de fiches personnes (UI_CreatePerson, UI_ModifyPerson, UI_PersonnViewer)
+- Visualisation de la liste des personnes
+
+### 🗂️ Gestion des groupes
+- Création de groupes (UI_CreateGroup)
+- Modification de groupes (UI_ModifyGroup)
+- Visualisation des groupes (UI_GroupsViewer)
+
+### 🎲 Tirages au sort
+- Création de tirages (UI_NewRandomDrawViewer)
+- Sélection aléatoire d'une personne dans un groupe (UI_RandomDrawPersonSelector)
+- Historique des tirages (UI_RandomDrawsViewer, UI_RandomDrawViewer)
+
+### 🎫 Menu Tickets
+- Écran dédié (UI_TicketsMenu)
+
+### 📤 Partage Android (plugin RDAndroidShare)
+- Partage du résultat via le système natif Android
+- Capture d'écran intégrée (RDScreenshotManager, RDShareManager)
+
+### 💾 Sauvegarde
+- Système de sauvegarde via RDSaveManager / RDSaveData
+
+---
+
+## 🛠️ Architecture technique
+
+| Élément | Détail |
 |---|---|
-| **Unreal Engine 4.27** | Moteur principal du projet |
-| **C++** | Programmation des systèmes du projet |
-| **Blueprints** | Création et gestion de la logique et de l'interface |
-| **Android** | Plateforme mobile cible |
-| **iOS** | Plateforme mobile cible |
+| Moteur | Unreal Engine 4.27 |
+| Plateformes cibles | Android, iOS |
+| Langages | C++ + Blueprints (UMG) |
 
-Le projet utilise **Unreal Engine 4.27**, comme indiqué dans sa configuration `.uproject`.
+### Structure C++ (Source/RandomDraw)
+- Managers/ : RDGroupManager, RDPersonManager, RDRandomDrawManager, RDSaveManager, RDScreenshotManager, RDShareManager
+- UI/ : classes C++ des Screens, Widgets et Popups
+- Save/ : RDSaveData (structure de sauvegarde)
+- Structs/, Enums/, FunctionLibrary/, System/
+
+### Blueprints / UMG (Content/)
+- System/ : BP_RDGameMode, BP_RDHUD
+- UI/Screens/ : 13 écrans (MainMenu, CreateGroup, RandomDrawViewer, etc.)
+- UI/Widgets/ : 13 widgets réutilisables (GroupLine, PersonLine, DrawLine, ColorSelector…)
+- UI/Popup/ : popups de confirmation
+- Level/, Textures/, Icones/
+
+### Plugin personnalisé
+- RDAndroidShare (Plugins/RDAndroidShare) : plugin maison pour le partage natif Android (UPL + intégration Java)
 
 ---
 
-## 📁 Structure du projet
+## 📁 Structure du dépôt
 
-```text
 RandomDraw/
-│
-├── Config/
-│   └── Configuration du projet
-│
-├── Content/
-│   └── Assets, Blueprints et ressources Unreal Engine
-│
+├── Config/                     → DefaultEngine.ini, DefaultGame.ini, etc.
+├── Content/                    → Assets UE (Blueprints, UI, textures)
 ├── Plugins/
-│   └── VisualStudioTools/
-│
+│   ├── RDAndroidShare/         → Plugin perso (partage Android)
+│   └── VisualStudioTools/      → Outils VS
 ├── Source/
-│   └── Code source C++
-│
-├── .gitattributes
-├── .gitignore
+│   └── RandomDraw/             → Code C++ du jeu
 ├── RandomDraw.uproject
-├── shadertoolsconfig.json
 └── README.md
-```
-
-Cette organisation correspond à la structure actuellement présente dans le dépôt GitHub.
 
 ---
 
-## 🚀 Installation
+## 🚀 Installation & lancement
 
 ### Prérequis
+- Unreal Engine 4.27
+- Visual Studio (Windows) avec workload C++ Unreal
+- Android NDK / SDK pour le packaging mobile
 
-Pour ouvrir et modifier le projet, il est nécessaire de disposer de :
-
-- **Unreal Engine 4.27**
-- **Visual Studio** avec les outils nécessaires au développement Unreal Engine
-- Les outils de développement correspondant à la plateforme mobile ciblée
-
-### Récupération du projet
-
-Cloner le dépôt :
-
-```bash
-git clone https://github.com/LepetitPortfolio/RandomDraw.git
-```
-
-Puis ouvrir le projet :
-
-```text
-RandomDraw/RandomDraw.uproject
-```
-
-Le projet utilise le module `RandomDraw` et le plugin `VisualStudioTools`.
-
----
-
-## ▶️ Lancement
-
-Après avoir ouvert `RandomDraw.uproject` avec Unreal Engine 4.27 :
-
-1. Générer les fichiers de projet si nécessaire.
-2. Ouvrir le projet dans Unreal Engine.
-3. Compiler le projet.
-4. Lancer l'application depuis l'éditeur.
-5. Tester le système de tirage.
-
-Pour une utilisation sur mobile, sélectionner la plateforme cible souhaitée et effectuer le packaging du projet.
-
----
-
-## 📱 Plateformes
-
-Le projet est actuellement configuré pour les plateformes suivantes :
-
-- **Android**
-- **iOS**
-
-Ces deux plateformes apparaissent comme plateformes cibles dans la configuration du projet Unreal.
+### Étapes
+1. Cloner le dépôt : git clone https://github.com/LepetitPortfolio/RandomDraw.git
+2. Ouvrir RandomDraw.uproject avec UE 4.27
+3. Compiler, puis lancer depuis l'éditeur ou packager pour Android/iOS
 
 ---
 
 ## 🔮 Améliorations envisagées
 
-Plusieurs évolutions peuvent être envisagées pour développer davantage le projet.
-
-### Attribution de tâches
-
-Ajouter un système permettant non seulement de sélectionner une personne, mais également de lui **attribuer automatiquement une tâche**.
-
-Exemple :
-
-```text
-Alice → Préparer le repas
-Bob   → Acheter les boissons
-Claire → Installer la décoration
-David → Nettoyer après la soirée
-```
-
----
-
-### Partage du résultat
-
-Ajouter la possibilité de **partager le résultat d'un tirage** directement sur les réseaux sociaux.
-
-Cela permettrait notamment de partager facilement le résultat avec les autres participants.
-
----
-
-### Envoi aux participants
-
-Ajouter différentes possibilités de communication :
-
-- 📧 envoi du résultat par e-mail ;
-- 📱 envoi par SMS ;
-- 🔗 génération d'un lien partageable.
-
-Ces pistes correspondent notamment aux évolutions envisagées dans la description originale du projet.
-
----
-
-## 🎓 Objectifs du projet
-
-Au-delà de son utilisation en tant qu'application, RandomDraw constitue également un **projet personnel de développement** permettant d'expérimenter différents aspects du développement avec Unreal Engine :
-
-- développement C++ ;
-- développement Blueprint ;
-- conception d'une application mobile ;
-- gestion d'une interface utilisateur ;
-- génération de résultats aléatoires ;
-- déploiement sur plateformes mobiles ;
-- organisation d'un projet Unreal Engine.
-
----
-
-## 📌 État du projet
-
-> **Projet personnel — développement / expérimentation**
-
-RandomDraw constitue une base fonctionnelle destinée à être progressivement améliorée.
-
-Certaines fonctionnalités présentées dans la section **Améliorations envisagées** ne sont pas encore implémentées.
+- Envoi du résultat par e-mail / SMS
+- Génération d'un lien partageable
+- Partage étendu (iOS, réseaux sociaux)
+- Nouveau thème visuel (ex. « Néon Nuit » dark mode)
 
 ---
 
 ## 👤 Auteur
 
-**Simon Lepetit**
-
-Développeur informatique spécialisé dans le **développement de jeux vidéo et la programmation gameplay**.
-
-Passionné par la création d'expériences interactives, j'utilise notamment **C++, C#, Unreal Engine et Unity** pour concevoir et expérimenter différents systèmes.
-
----
-
-## 🔗 Liens
-
-- **Dépôt GitHub :** https://github.com/LepetitPortfolio/RandomDraw
-- **Portfolio :** https://www.lepetitportfolio.fr/
-
----
-
-## 📄 Licence
-
-Aucune licence open source spécifique n'est actuellement indiquée dans le dépôt.
-
-Pour toute réutilisation ou redistribution du code, veuillez vous référer aux conditions définies par l'auteur du projet.
+**Simon Lepetit** — Développeur jeux vidéo & gameplay
+Portfolio : https://www.lepetitportfolio.fr/ | GitHub : https://github.com/LepetitPortfolio/RandomDraw
