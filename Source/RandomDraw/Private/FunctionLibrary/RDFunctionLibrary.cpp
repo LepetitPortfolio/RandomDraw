@@ -242,4 +242,26 @@ FRDGroup* URDFunctionLibrary::GetGroup(FString _GroupID)
 	return group;
 }
 
+FVector2D URDFunctionLibrary::GetGameViewportSize()
+{
+	FVector2D Result = FVector2D(1, 1);
+
+	if (GEngine && GEngine->GameViewport)
+	{
+		GEngine->GameViewport->GetViewportSize(Result);
+	}
+
+	return Result;
+}
+
+FVector2D URDFunctionLibrary::GetGameResolution()
+{
+	FVector2D Result = FVector2D(1, 1);
+
+	Result.X = GSystemResolution.ResX;
+	Result.Y = GSystemResolution.ResY;
+
+	return Result;
+}
+
 

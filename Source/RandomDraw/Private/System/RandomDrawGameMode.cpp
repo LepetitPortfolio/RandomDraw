@@ -116,3 +116,13 @@ void ARandomDrawGameMode::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	URDFunctionLibrary::ResetGameMode();
 }
+
+FVector2D ARandomDrawGameMode::GetGameViewportSize()
+{
+	return URDFunctionLibrary::GetGameViewportSize();
+}
+
+FVector2D ARandomDrawGameMode::GetGameResolution()
+{
+	return URDFunctionLibrary::GetGameResolution();
+}

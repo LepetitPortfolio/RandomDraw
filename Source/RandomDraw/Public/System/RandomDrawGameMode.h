@@ -156,4 +156,10 @@ protected:
 	* @param EndPlayReason - Reason of end play
 	*/
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
+	UFUNCTION(BlueprintCallable, Category = RDGameMode)
+	FVector2D GetGameViewportSize();
+
+	UFUNCTION(BlueprintCallable, Category = RDGameMode)
+	FVector2D GetGameResolution();
 };

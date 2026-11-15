@@ -149,6 +149,12 @@ public:
 	*/
 	static FRDGroup* GetGroup(FString _GroupID);
 
+	UFUNCTION(BlueprintCallable, Category = RDFunctionLibrary)
+	static FVector2D GetGameViewportSize();
+
+	UFUNCTION(BlueprintCallable, Category = RDFunctionLibrary)
+	static FVector2D GetGameResolution();
+
 private:
 
 	/* reference of the Game Mode */
