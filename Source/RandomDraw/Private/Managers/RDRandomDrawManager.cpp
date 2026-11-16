@@ -119,10 +119,8 @@ void URDRandomDrawManager::FixRandomDrawValues(FRDRandomDraw* _RandomDraw)
 		FRDGroup* secondGroup = URDFunctionLibrary::GetGroup(secondPerson->m_FirstGroupID);
 
 		draw->m_FirstPersonName = firstPerson->m_Name;
-		draw->m_FirstPersonColor = firstGroup->m_Color;
 
 		draw->m_SecondPersonName = secondPerson->m_Name;
-		draw->m_SecondPersonColor = secondGroup->m_Color;
 	}
 }
 

@@ -13,7 +13,6 @@ void URDWidgetGroupSelection::InitValues(FRDGroup* _Group, class URDWidgetGroupS
 	}
 	m_Group = _Group;
 	m_Libelle = m_Group->m_Libelle;
-	m_Color = m_Group->m_Color;
 
 	m_GroupSelector = _GroupSelector;
 }

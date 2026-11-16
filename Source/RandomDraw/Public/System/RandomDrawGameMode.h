@@ -97,6 +97,9 @@ public:
 	UFUNCTION()
 	inline class URDThemeManager* GetThemeManager() { return m_ThemeManager; }
 
+	UFUNCTION()
+	inline class UDataTable* GetThemeDataTable() { return m_ThemeDataTable; }
+
 	/**
 	* return the referenc of appdata
 	* @return referenc of appdata
@@ -156,6 +159,9 @@ protected:
 	/* History of menu stat displayed */
 	UPROPERTY(BlueprintReadOnly, Category = RDGameMode)
 		TArray<FRDStateHistory> m_MenuStateHistory;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RDGameMode")
+	UDataTable* m_ThemeDataTable = nullptr;
 
 	/** 
 	* UE4 Function, launched when the object is instantiate 

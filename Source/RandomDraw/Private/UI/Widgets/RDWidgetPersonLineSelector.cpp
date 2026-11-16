@@ -10,7 +10,6 @@ void URDWidgetPersonLineSelector::InitValue(class URDUIViewerPersonsSelector* _P
 	m_Person = _Person;
 
 	m_PersonName = m_Person->m_Name;
-	m_Color = URDFunctionLibrary::GetAppData()->m_Groups.operator[](m_Person->m_FirstGroupID).m_Color;
 
 	m_PersonsSelector = _PersonsSelector;
 }

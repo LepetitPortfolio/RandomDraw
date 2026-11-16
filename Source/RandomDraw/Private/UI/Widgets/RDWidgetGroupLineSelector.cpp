@@ -15,7 +15,6 @@ void URDWidgetGroupLineSelector::InitValue(class URDUIViewerPersonsSelector* _Pe
 
 	m_Group = _Group;
 	m_Libelle = m_Group->m_Libelle;
-	m_Color = m_Group->m_Color;
 
 	m_PersonsSelectorView = _PersonsSelectorView;
 }

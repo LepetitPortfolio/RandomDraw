@@ -14,6 +14,16 @@ FColor URDUIBase::ReverseColorRGB(FColor _Color)
 	return _Color;
 }
 
+FText URDUIBase::GetThemeName()
+{
+	return FText::FromName(URDFunctionLibrary::GetThemeManager()->GetCurrentThemeName());
+}
+
+FSlateColor URDUIBase::GetBackgroundColor()
+{
+	return FSlateColor(URDFunctionLibrary::GetThemeManager()->GetCurrentBackgroundColor());
+}
+
 FSlateColor URDUIBase::GetSurfaceColor()
 {
 	return FSlateColor(URDFunctionLibrary::GetThemeManager()->GetCurrentSurfaceColor());

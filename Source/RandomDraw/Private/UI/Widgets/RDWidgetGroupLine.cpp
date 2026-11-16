@@ -17,7 +17,6 @@ void URDWidgetGroupLine::InitValue(FRDGroup* _Group, URDUIViewerGroup* _ViewerGr
 	m_Group = _Group;
 	m_ViewerGroup = _ViewerGroup;
 	m_Libelle = m_Group->m_Libelle;
-	m_Color = m_Group->m_Color;
 }
 
 void URDWidgetGroupLine::DeleteGroup()

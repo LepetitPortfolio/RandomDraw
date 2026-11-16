@@ -17,23 +17,23 @@ public:
     FName ThemeName = FName("Default");
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite) 
-    FLinearColor Background = FLinearColor(0.04f, 0.05f, 0.10f); // fond app
+    FLinearColor Background = FLinearColor(0.10f, 0.10f, 0.14f);
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite) 
-    FLinearColor Surface = FLinearColor(0.08f, 0.10f, 0.18f); // cartes
+    FLinearColor Surface = FLinearColor(0.16f, 0.16f, 0.22f);
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite) 
-    FLinearColor Primary = FLinearColor(0.55f, 0.36f, 0.96f); // violet accent
+    FLinearColor Primary = FLinearColor(0.55f, 0.30f, 0.95f);
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite) 
-    FLinearColor Secondary = FLinearColor(0.13f, 0.83f, 0.93f); // cyan accent
+    FLinearColor Secondary = FLinearColor(0.20f, 0.85f, 0.90f); 
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite) 
-    FLinearColor TextPrimary = FLinearColor(0.95f, 0.96f, 0.98f);
+    FLinearColor TextPrimary = FLinearColor(1.0f, 1.0f, 1.0f);
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite) 
-    FLinearColor TextSecondary = FLinearColor(0.58f, 0.64f, 0.72f);
+    FLinearColor TextSecondary = FLinearColor(0.65f, 0.65f, 0.70f);
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite) 
-    FLinearColor Danger = FLinearColor(0.96f, 0.36f, 0.42f);
+    FLinearColor Danger = FLinearColor(0.95f, 0.25f, 0.30f);
 };

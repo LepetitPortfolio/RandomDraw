@@ -12,7 +12,6 @@ void URDWidgetDrawLine::InitValue(FRDDraw* _Draw)
 	{
 		FRDPerson* firstPerson = URDFunctionLibrary::GetPerson(m_Draw->m_FirstPersonID);
 		m_FirstPersonLibelle = firstPerson->m_Name;
-		m_FirstPersonColor = URDFunctionLibrary::GetGroup(firstPerson->m_FirstGroupID)->m_Color;
 	}
 	else
 	{
@@ -24,7 +23,6 @@ void URDWidgetDrawLine::InitValue(FRDDraw* _Draw)
 	{
 		FRDPerson* secondPerson = URDFunctionLibrary::GetPerson(m_Draw->m_SecondPersonID);
 		m_SecondPersonLibelle = secondPerson->m_Name;
-		m_SecondPersonColor = URDFunctionLibrary::GetGroup(secondPerson->m_FirstGroupID)->m_Color;
 	}
 	else
 	{

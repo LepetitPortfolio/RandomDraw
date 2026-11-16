@@ -24,6 +24,11 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = UIBase)
 		FColor ReverseColorRGB(FColor _Color);
 
+	UFUNCTION(BlueprintGetter, Category = UIBase)
+		FText GetThemeName();
+
+	UFUNCTION(BlueprintGetter, Category = UIBase)
+		FSlateColor GetBackgroundColor();
 	
 	UFUNCTION(BlueprintGetter, Category = UIBase)
 		FSlateColor GetSurfaceColor();

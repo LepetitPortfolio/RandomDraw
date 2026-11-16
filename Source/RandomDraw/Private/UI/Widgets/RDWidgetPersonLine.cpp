@@ -13,15 +13,6 @@ void URDWidgetPersonLine::InitValue(FRDPerson* _Person, URDUIViewerPerson* _View
 	m_ViewerPerson = _ViewerPerson;
 
 	m_PersonName = m_Person->m_Name;
-
-	if (!m_Person->m_FirstGroupID.IsEmpty())
-	{
-		m_Color = URDFunctionLibrary::GetAppData()->m_Groups.operator[](m_Person->m_FirstGroupID).m_Color;
-	}
-	else
-	{
-		m_Color = FLinearColor(0, 0, 0, 0);
-	}
 }
 
 void URDWidgetPersonLine::DeleteThePerson()

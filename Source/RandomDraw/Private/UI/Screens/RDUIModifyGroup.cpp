@@ -17,8 +17,6 @@ void URDUIModifyGroup::NativeConstruct()
 
 	m_GroupName = m_Group->m_Libelle;
 
-	m_ColorSelector->ChangeColorSelected(m_Group->m_Color);
-
 	Super::NativeConstruct();
 }
 
@@ -26,11 +24,6 @@ void URDUIModifyGroup::ModifyGroup()
 {
 	bool modifyCheck = false;
 	if ((!m_GroupName.IsEmpty()) && (m_Group->m_Libelle != m_GroupName))
-	{
-		modifyCheck = true;
-	}
-
-	if (m_Group->m_Color != m_ColorSelector->GetColor())
 	{
 		modifyCheck = true;
 	}
@@ -58,7 +51,6 @@ void URDUIModifyGroup::ModifyGroup()
 void URDUIModifyGroup::ApplyModifyGroup()
 {
 	m_Group->m_Libelle = m_GroupName;
-	m_Group->m_Color = m_ColorSelector->GetColor();
 
 	URDFunctionLibrary::LaunchSaveData();
 	URDFunctionLibrary::GetGroupManager()->SetGroupModify(nullptr);

@@ -24,9 +24,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDGroup)
 		FString m_Libelle = "";
 
-	/* Group color */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDGroup)
-		FLinearColor m_Color = FLinearColor::Black;
 
 	/**
 	* Constructor
@@ -39,13 +36,11 @@ public:
 	{
 		m_ID = _Group->m_ID;
 		m_Libelle = _Group->m_Libelle;
-		m_Color = _Group->m_Color;
 	}
 
 	FORCEINLINE void operator=(FRDGroup _Other)
 	{
 		m_ID = _Other.m_ID;
 		m_Libelle = _Other.m_Libelle;
-		m_Color = _Other.m_Color;
 	}
 };

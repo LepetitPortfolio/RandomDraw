@@ -25,10 +25,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDUIModifyGroup)
 		FString m_GroupName = "";
 
-	/* Group Color modify */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDUIModifyGroup, meta = (BindWidget))
-		URDWidgetColorSelector* m_ColorSelector = nullptr;
-
 	/**
 	* UE4 Function : Called when the object is construct
 	*/

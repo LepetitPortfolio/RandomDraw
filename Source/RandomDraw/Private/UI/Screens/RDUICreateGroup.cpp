@@ -19,7 +19,6 @@ void URDUICreateGroup::NativeConstruct()
 
 void URDUICreateGroup::CreateGroup()
 {
-	m_Group.m_Color = m_ColorSelector->GetColor();
 	URDFunctionLibrary::GetGroupManager()->CreateGroup(&m_Group);
 	URDFunctionLibrary::LaunchSaveData();
 }

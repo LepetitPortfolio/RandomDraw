@@ -21,11 +21,6 @@ protected:
 	/* New Group data to create */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDUICreateGroup)
 	FRDGroup m_Group = FRDGroup();
-
-	/* Color selector Widget */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDUICreateGroup, meta = (BindWidget))
-		URDWidgetColorSelector* m_ColorSelector = nullptr;
-
 	/**
 	* UE4 Function : Called when the object is construct
 	*/

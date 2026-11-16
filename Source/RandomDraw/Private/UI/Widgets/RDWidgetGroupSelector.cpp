@@ -60,7 +60,6 @@ void URDWidgetGroupSelector::ChangeGroupSelected(FRDGroup* _Group)
 	}
 
 	m_GroupNameSelected = m_Group->m_Libelle;
-	m_GroupColorSelected = m_Group->m_Color;
 
 	m_ScrollBox->SetVisibility(ESlateVisibility::Collapsed);
 }

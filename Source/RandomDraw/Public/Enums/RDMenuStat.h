@@ -22,5 +22,6 @@ enum class ERDMenuStat : uint8
 	CreateGroup,
 	ModifyPerson,
 	ModifyGroup,
+	SettingUp,
 	Max		UMETA(Hidden)
 };
