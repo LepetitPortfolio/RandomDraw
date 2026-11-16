@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- FileProvider declaration -->
     <androidManifestUpdates>
         <addElements tag="application">
             <provider
@@ -16,20 +15,22 @@
         </addElements>
     </androidManifestUpdates>
 
-    <!-- Inject file_paths.xml -->
     <resourceCopies>
         <copyFile
             src="$S(PluginDir)/Source/RDAndroidShare/file_paths.xml"
             dst="$S(BuildDir)/res/xml/file_paths.xml" />
     </resourceCopies>
 
-    <!-- androidx.core dependency for FileProvider -->
+    <!-- Propriétés AndroidX (valides, celles-ci vont bien dans gradle.properties) -->
     <gradleProperties>
-        <insertNewAttributeIn Gradle="dependencies">
-            implementation 'androidx.core:core:1.6.0'
-        </insertNewAttributeIn>
         <insertNew>android.useAndroidX=true</insertNew>
         <insertNew>android.enableJetifier=true</insertNew>
     </gradleProperties>
+
+    <buildGradleAdditions>
+        <insert>
+            dependencies { implementation 'androidx.core:core:1.6.0'}
+        </insert>
+    </buildGradleAdditions>
 
 </root>
