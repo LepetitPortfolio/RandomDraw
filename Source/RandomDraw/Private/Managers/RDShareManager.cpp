@@ -33,11 +33,19 @@ bool URDShareManager::ScanFileInGallery(const FString& _ImagePath)
 }
 
 #if PLATFORM_ANDROID
+
 void URDShareManager::AndroidShareText(const FString& _Text, const FString& _ChooserTitle)
 {
     if (JNIEnv* Env = FAndroidApplication::GetJavaEnv())
     {
         jclass IntentClass = Env->FindClass("android/content/Intent");
+        if (Env->ExceptionCheck())
+        {
+            Env->ExceptionDescribe();
+            Env->ExceptionClear();
+            UE_LOG(LogTemp, Error, TEXT("JNI FindClass failed: android/content/Intent"));
+            return;
+        }
         jmethodID Ctor = Env->GetMethodID(IntentClass, "<init>", "(Ljava/lang/String;)V");
         jstring ActionSend = Env->NewStringUTF("android.intent.action.SEND");
         jobject IntentObj = Env->NewObject(IntentClass, Ctor, ActionSend);
@@ -64,32 +72,66 @@ void URDShareManager::AndroidShareText(const FString& _Text, const FString& _Cho
 
 void URDShareManager::AndroidShareImage(const FString& _ImagePath, const FString& _Text)
 {
+    // DEBUG : vérifier que le fichier existe avant tout
+    if (!FPaths::FileExists(_ImagePath))
+    {
+        UE_LOG(LogTemp, Error, TEXT("[RDShare] Fichier INEXISTANT: %s"), *_ImagePath);
+        return;
+    }
+    UE_LOG(LogTemp, Log, TEXT("[RDShare] Fichier OK: %s (taille: %lld octets)"), *_ImagePath, IFileManager::Get().FileSize(*_ImagePath));
+
     if (JNIEnv* Env = FAndroidApplication::GetJavaEnv())
     {
         // File + Uri via FileProvider
         jclass FileClass = Env->FindClass("java/io/File");
+        if (Env->ExceptionCheck())
+        {
+            Env->ExceptionDescribe();
+            Env->ExceptionClear();
+            UE_LOG(LogTemp, Error, TEXT("JNI FindClass failed: java/io/File"));
+            return;
+        }
         jmethodID FileCtor = Env->GetMethodID(FileClass, "<init>", "(Ljava/lang/String;)V");
         jstring Path = Env->NewStringUTF(TCHAR_TO_UTF8(*_ImagePath));
         jobject FileObj = Env->NewObject(FileClass, FileCtor, Path);
 
-        // ⚠️ UNE SEULE déclaration de Activity / ActivityClass
         jobject Activity = FAndroidApplication::GetGameActivityThis();
         jclass ActivityClass = Env->GetObjectClass(Activity);
 
-        // Package name via JNI (compatible UE 4.27)
+        jclass FileProviderClass = Env->FindClass("androidx/core/content/FileProvider");
+        if (Env->ExceptionCheck())
+        {
+            Env->ExceptionDescribe();
+            Env->ExceptionClear();
+            UE_LOG(LogTemp, Error, TEXT("JNI FindClass failed: androidx/core/content/FileProvider"));
+            return;
+        }
+        jmethodID GetUri = Env->GetStaticMethodID(FileProviderClass, "getUriForFile", "(Landroid/content/Context;Ljava/lang/String;Ljava/io/File;)Landroid/net/Uri;");
+
         jmethodID GetPackageNameMID = Env->GetMethodID(ActivityClass, "getPackageName", "()Ljava/lang/String;");
         jstring PkgJ = (jstring)Env->CallObjectMethod(Activity, GetPackageNameMID);
-        const char* PkgChars = Env->GetStringUTFChars(PkgJ, nullptr);
-        FString Authority = FString::Printf(TEXT("%s.fileprovider"), UTF8_TO_TCHAR(PkgChars));
-        Env->ReleaseStringUTFChars(PkgJ, PkgChars);
+        FString Authority = FString::Printf(TEXT("%s.fileprovider"), UTF8_TO_TCHAR(Env->GetStringUTFChars(PkgJ, nullptr)));
 
-        jclass FileProviderClass = Env->FindClass("androidx/core/content/FileProvider");
-        jmethodID GetUri = Env->GetStaticMethodID(FileProviderClass, "getUriForFile", "(Landroid/content/Context;Ljava/lang/String;Ljava/io/File;)Landroid/net/Uri;");
         jstring AuthorityJ = Env->NewStringUTF(TCHAR_TO_UTF8(*Authority));
         jobject UriObj = Env->CallStaticObjectMethod(FileProviderClass, GetUri, Activity, AuthorityJ, FileObj);
+        if (Env->ExceptionCheck() || UriObj == nullptr)
+        {
+            Env->ExceptionDescribe();
+            Env->ExceptionClear();
+            UE_LOG(LogTemp, Error, TEXT("[RDShare] getUriForFile a ÉCHOUÉ pour: %s"), *_ImagePath);
+            return;
+        }
+        UE_LOG(LogTemp, Log, TEXT("[RDShare] URI obtenue, lancement du chooser..."));
 
         // Intent ACTION_SEND image/png
         jclass IntentClass = Env->FindClass("android/content/Intent");
+        if (Env->ExceptionCheck())
+        {
+            Env->ExceptionDescribe();
+            Env->ExceptionClear();
+            UE_LOG(LogTemp, Error, TEXT("JNI FindClass failed: android/content/Intent"));
+            return;
+        }
         jmethodID Ctor = Env->GetMethodID(IntentClass, "<init>", "(Ljava/lang/String;)V");
         jstring ActionSend = Env->NewStringUTF("android.intent.action.SEND");
         jobject IntentObj = Env->NewObject(IntentClass, Ctor, ActionSend);
@@ -110,8 +152,8 @@ void URDShareManager::AndroidShareImage(const FString& _ImagePath, const FString
         Env->CallObjectMethod(IntentObj, AddFlags, 0x00000001); // FLAG_GRANT_READ_URI_PERMISSION
 
         jmethodID CreateChooser = Env->GetStaticMethodID(IntentClass, "createChooser", "(Landroid/content/Intent;Ljava/lang/CharSequence;)Landroid/content/Intent;");
-        // ⚠️ fix char16_t → UTF-8
-        jobject Chooser = Env->CallStaticObjectMethod(IntentClass, CreateChooser, IntentObj, Env->NewStringUTF(TCHAR_TO_UTF8(TEXT("Partager le résultat 🎁"))));
+        jobject Chooser = Env->CallStaticObjectMethod(IntentClass, CreateChooser, IntentObj, Env->NewStringUTF("Partager le resultat")); // correctif n°3 : plus d'emoji
+        Env->CallObjectMethod(Chooser, AddFlags, 0x00000001); // correctif n°2 : flag aussi sur le chooser
 
         jmethodID StartActivity = Env->GetMethodID(ActivityClass, "startActivity", "(Landroid/content/Intent;)V");
         Env->CallVoidMethod(Activity, StartActivity, Chooser);
@@ -123,9 +165,23 @@ bool URDShareManager::AndroidScanFileInGallery(const FString& _ImagePath)
     if (JNIEnv* Env = FAndroidApplication::GetJavaEnv())
     {
         jclass ScannerClass = Env->FindClass("android/media/MediaScannerConnection");
+        if (Env->ExceptionCheck())
+        {
+            Env->ExceptionDescribe();
+            Env->ExceptionClear();
+            UE_LOG(LogTemp, Error, TEXT("JNI FindClass failed: android/media/MediaScannerConnection"));
+            return false;
+        }
         jmethodID ScanFile = Env->GetStaticMethodID(ScannerClass, "scanFile", "(Landroid/content/Context;[Ljava/lang/String;[Ljava/lang/String;Landroid/media/MediaScannerConnection$OnScanCompletedListener;)V");
 
         jclass StringClass = Env->FindClass("java/lang/String");
+        if (Env->ExceptionCheck())
+        {
+            Env->ExceptionDescribe();
+            Env->ExceptionClear();
+            UE_LOG(LogTemp, Error, TEXT("JNI FindClass failed: java/lang/String"));
+            return false;
+        }
         jobjectArray Paths = Env->NewObjectArray(1, StringClass, nullptr);
         Env->SetObjectArrayElement(Paths, 0, Env->NewStringUTF(TCHAR_TO_UTF8(*_ImagePath)));
 
