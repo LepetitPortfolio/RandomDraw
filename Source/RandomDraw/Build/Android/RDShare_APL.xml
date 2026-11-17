@@ -1,36 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <androidManifestUpdates>
-        <addElements tag="application">
-            <provider
-                android:name="androidx.core.content.FileProvider"
-                android:authorities="${applicationid}.fileprovider"
-                android:exported="false"
-                android:grantUriPermissions="true">
-                <meta-data
-                    android:name="android.support.FILE_PROVIDER_PATHS"
-                    android:resource="@xml/file_paths" />
-            </provider>
-        </addElements>
-    </androidManifestUpdates>
-
-    <resourceCopies>
-        <copyFile src="$S(ProjectDir)/Build/Android/res/xml/file_paths.xml"
-                  dst="$S(BuildDir)/res/xml/file_paths.xml" />
-    </resourceCopies>
-
-    <gradleProperties>
-        <insertNew>android.useAndroidX=true</insertNew>
-        <insertNew>android.enableJetifier=true</insertNew>
-    </gradleProperties>
-
     <buildGradleAdditions>
         <insert>
-dependencies {
-    implementation 'androidx.core:core:1.6.0'
-}
+			dependencies { implementation 'androidx.core:core:1.6.0'}
         </insert>
     </buildGradleAdditions>
-
 </root>
