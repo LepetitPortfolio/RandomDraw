@@ -16,6 +16,7 @@ public class RandomDraw : ModuleRules
         if (Target.Platform == UnrealTargetPlatform.Android)
         {
             PrivateDependencyModuleNames.AddRange(new string[] { "Launch" }); // AndroidJNI / AndroidApplication
+            AdditionalPropertiesForReceipt.Add("AndroidPlugin", Path.Combine(ModuleDirectory, "Build/Android/RDShare_APL.xml"));
         }
     }
 }
