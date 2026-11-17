@@ -26,11 +26,4 @@
         <insertNew>android.useAndroidX=true</insertNew>
         <insertNew>android.enableJetifier=true</insertNew>
     </gradleProperties>
-
-    <buildGradleAdditions>
-        <insert>
-            dependencies { implementation 'androidx.core:core:1.6.0'}
-        </insert>
-    </buildGradleAdditions>
-
 </root>
