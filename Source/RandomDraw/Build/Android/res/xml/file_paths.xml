@@ -1,5 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <paths>
-	<external-files-path name="external_app_files" path="." />
-	<cache-path name="cache" path="." />
+    <external-path name="external_files" path="."/>
+    <external-files-path name="external_app_files" path="."/>
+    <cache-path name="cache" path="."/>
+    <files-path name="files" path="."/>
+    <cache-path name="shared_images" path="share/"/>
+    <external-path name="rd_screenshots" path="UE4Game/RandomDraw/RandomDraw/Saved/Screenshots/"/>
 </paths>
