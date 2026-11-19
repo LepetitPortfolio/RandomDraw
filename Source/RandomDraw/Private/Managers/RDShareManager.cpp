@@ -115,8 +115,7 @@ void URDShareManager::AndroidShareImage(const FString& _ImagePath, const FString
     FLocalRef ActivityClass(Env, Env->GetObjectClass(Activity));
     if (!CheckJNI(Env, TEXT("GetObjectClass activity")) || !ActivityClass.Obj) return;
 
-    jmethodID Method = Env->GetMethodID((jclass)ActivityClass.Obj,
-        "rdShareImage", "(Ljava/lang/String;Ljava/lang/String;)Z");
+    jmethodID Method = Env->GetMethodID((jclass)ActivityClass.Obj, "rdShareImage", "(Ljava/lang/String;Ljava/lang/String;)Z");
     if (!CheckJNI(Env, TEXT("GetMethodID rdShareImage")) || !Method) return;
 
     FLocalRef ImagePathJ(Env, NewJString(Env, _ImagePath));

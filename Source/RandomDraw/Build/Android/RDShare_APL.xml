@@ -68,7 +68,7 @@ import androidx.core.content.FileProvider;
         }
         
 
-        public boolean rdShareImage(String path, String text) {
+        public boolean rdShareImage(String path, final String text) {
             try {
                 File sourceFile = new File(path);
                 if (!sourceFile.exists() || !sourceFile.isFile()) {
@@ -95,7 +95,7 @@ import androidx.core.content.FileProvider;
                     }
                 }
 
-                Uri imageUri = FileProvider.getUriForFile(
+                final Uri imageUri = FileProvider.getUriForFile(
                     this, getPackageName() + ".fileprovider", sharedFile);
                 runOnUiThread(new Runnable() {
                     @Override
