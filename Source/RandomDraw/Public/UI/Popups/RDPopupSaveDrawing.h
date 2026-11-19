@@ -14,14 +14,6 @@ class RANDOMDRAW_API URDPopupSaveDrawing : public URDPopupBase
 {
 	GENERATED_BODY()
 
-public:
-
-	/**
-	* Launch the drawing save process 
-	*/
-	UFUNCTION(BlueprintCallable, Category = PopupSaveDrawing)
-		void SaveDrawing();
-
 protected:
 	
 	/* Save name */
@@ -36,4 +28,13 @@ protected:
 	* UE4 Function : Called just before to display the UMG
 	*/
 	virtual void NativeConstruct() override;
+
+	/**
+	* Launch the drawing save process
+	*/
+	UFUNCTION(BlueprintCallable, Category = PopupSaveDrawing)
+	void SaveDrawing();
+
+	UFUNCTION(BlueprintCallable, Category = PopupSaveDrawing)
+	bool CheckFormValidity();
 };

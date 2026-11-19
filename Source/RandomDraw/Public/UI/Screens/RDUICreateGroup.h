@@ -36,4 +36,7 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = RDUICreateGroup)
 	void CreateGroup();
 
+	UFUNCTION(BlueprintCallable, Category = PopupSaveDrawing)
+	bool CheckFormValidity();
+
 };

@@ -22,3 +22,8 @@ void URDUICreateGroup::CreateGroup()
 	URDFunctionLibrary::GetGroupManager()->CreateGroup(&m_Group);
 	URDFunctionLibrary::LaunchSaveData();
 }
+
+bool URDUICreateGroup::CheckFormValidity()
+{
+	return !m_Group.m_Libelle.IsEmpty();
+}

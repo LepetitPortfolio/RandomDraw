@@ -22,3 +22,12 @@ void URDUICreatePerson::CreatePerson()
 	URDFunctionLibrary::GetPersonManager()->CreatePerson(&m_Person, m_FirstGroupSelector->GetGroup(), m_SecondGroupSelector->GetGroup());
 	URDFunctionLibrary::LaunchSaveData();
 }
+
+bool URDUICreatePerson::CheckFormValidity()
+{
+	if((!m_Person.m_Name.IsEmpty()) && (!m_Person.m_FirstGroupID.IsEmpty() || !m_Person.m_SecondGroupID.IsEmpty()))
+	{
+		return true;
+	}
+	return false;
+}

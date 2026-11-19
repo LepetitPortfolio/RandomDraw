@@ -21,3 +21,8 @@ void URDPopupSaveDrawing::NativeConstruct()
 {
 	Super::NativeConstruct();
 }
+
+bool URDPopupSaveDrawing::CheckFormValidity()
+{
+	return !m_SaveName.IsEmpty();
+}

@@ -44,4 +44,7 @@ protected:
 	*/
 	UFUNCTION(BlueprintCallable, Category = RDUICreateGroup)
 	void CreatePerson();
+
+	UFUNCTION(BlueprintCallable, Category = PopupSaveDrawing)
+	bool CheckFormValidity();
 };
