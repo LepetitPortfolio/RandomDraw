@@ -19,28 +19,26 @@ Exemples d'utilisation :
 ## ✨ Fonctionnalités implémentées
 
 ### 👥 Gestion des personnes
-- Création et modification de fiches personnes (UI_CreatePerson, UI_ModifyPerson, UI_PersonnViewer)
+- Création et modification de fiches personnes
 - Visualisation de la liste des personnes
 
 ### 🗂️ Gestion des groupes
-- Création de groupes (UI_CreateGroup)
-- Modification de groupes (UI_ModifyGroup)
-- Visualisation des groupes (UI_GroupsViewer)
+- Création et modification de groupes
+- Visualisation des groupes
 
 ### 🎲 Tirages au sort
-- Création de tirages (UI_NewRandomDrawViewer)
-- Sélection aléatoire d'une personne dans un groupe (UI_RandomDrawPersonSelector)
-- Historique des tirages (UI_RandomDrawsViewer, UI_RandomDrawViewer)
+- Création de tirages avec sélection aléatoire d'une personne dans un groupe
+- Historique des tirages effectués
 
 ### 🎫 Menu Tickets
-- Écran dédié (UI_TicketsMenu)
+- Écran dédié
 
-### 📤 Partage Android (plugin RDAndroidShare)
-- Partage du résultat via le système natif Android
-- Capture d'écran intégrée (RDScreenshotManager, RDShareManager)
+### 📤 Partage Android
+- Partage du résultat via le système natif Android (share sheet)
+- Capture d'écran intégrée du résultat du tirage
 
 ### 💾 Sauvegarde
-- Système de sauvegarde via RDSaveManager / RDSaveData
+- Persistance des données (personnes, groupes, tirages, historique)
 
 ---
 
@@ -50,52 +48,54 @@ Exemples d'utilisation :
 |---|---|
 | Moteur | Unreal Engine 4.27 |
 | Plateformes cibles | Android, iOS |
-| Langages | C++ + Blueprints (UMG) |
+| Langages | C++ (module Runtime) + Blueprints/UMG |
+| Rendu | Profil matériel **Mobile**, MSAA x2, orientation **Portrait** |
 
-### Structure C++ (Source/RandomDraw)
-- Managers/ : RDGroupManager, RDPersonManager, RDRandomDrawManager, RDSaveManager, RDScreenshotManager, RDShareManager
-- UI/ : classes C++ des Screens, Widgets et Popups
-- Save/ : RDSaveData (structure de sauvegarde)
-- Structs/, Enums/, FunctionLibrary/, System/
+### Structure C++ (`Source/RandomDraw/`)
+- **Managers/** : `RDGroupManager`, `RDPersonManager`, `RDRandomDrawManager`, `RDSaveManager`, `RDScreenshotManager`, `RDShareManager`, `RDThemeManager`
+- **UI/** : classes C++ des Screens (16 écrans : MainMenu, CreatePerson, ModifyPerson, CreateGroup, ModifyGroup, viewers, sélecteurs, paramètres, Tickets…) et bases réutilisables (`RDUIBase`, `RDUIViewerBase`)
+- **Structs/** : 8 structures de données (`RDPerson`, `RDGroup`, `RDRandomDraw`, `RDDraw`, `RDAppData`, `RDStateHistory`, `RDTheme`, `RDUIInstance`)
+- **Save/** : `RDSaveData`
+- **Enums/**, **FunctionLibrary/**, **System/** (`RDGameMode`, `RDGameInstance`)
 
-### Blueprints / UMG (Content/)
-- System/ : BP_RDGameMode, BP_RDHUD
-- UI/Screens/ : 13 écrans (MainMenu, CreateGroup, RandomDrawViewer, etc.)
-- UI/Widgets/ : 13 widgets réutilisables (GroupLine, PersonLine, DrawLine, ColorSelector…)
-- UI/Popup/ : popups de confirmation
-- Level/, Textures/, Icones/
-
-### Plugin personnalisé
-- RDAndroidShare (Plugins/RDAndroidShare) : plugin maison pour le partage natif Android (UPL + intégration Java)
+### Blueprints / UMG (`Content/`)
+- **System/** : `BP_RDGameMode`, HUD
+- **UI/Screens/** : écrans du jeu
+- **UI/Widgets/** : 13 widgets réutilisables (lignes personnes/groupes/tirages, sélecteur de couleur…)
+- **UI/Popup/** : popups de confirmation
+- **Level/** : map `Main` | **Textures/**, **Icones/**, **DataTables/**
 
 ---
 
 ## 📁 Structure du dépôt
 
 RandomDraw/
-├── Config/                     → DefaultEngine.ini, DefaultGame.ini, etc.
-├── Content/                    → Assets UE (Blueprints, UI, textures)
+├── Config/            → DefaultEngine.ini, DefaultGame.ini…
+├── Content/           → Assets UE (Blueprints, UI, textures)
 ├── Plugins/
-│   ├── RDAndroidShare/         → Plugin perso (partage Android)
-│   └── VisualStudioTools/      → Outils VS
+│   └── VisualStudioTools/   → outils VS (Win64)
 ├── Source/
-│   └── RandomDraw/             → Code C++ du jeu
+│   └── RandomDraw/    → code C++ du jeu
 ├── RandomDraw.uproject
 └── README.md
+
 
 ---
 
 ## 🚀 Installation & lancement
 
 ### Prérequis
-- Unreal Engine 4.27
-- Visual Studio (Windows) avec workload C++ Unreal
+- Unreal Engine **4.27**
+- Visual Studio (Windows) avec le workload C++ Unreal
 - Android NDK / SDK pour le packaging mobile
 
 ### Étapes
-1. Cloner le dépôt : git clone https://github.com/LepetitPortfolio/RandomDraw.git
-2. Ouvrir RandomDraw.uproject avec UE 4.27
+1. Cloner le dépôt : `git clone https://github.com/LepetitPortfolio/RandomDraw.git`
+2. Ouvrir `RandomDraw.uproject` avec UE 4.27
 3. Compiler, puis lancer depuis l'éditeur ou packager pour Android/iOS
+
+### Configuration Android
+- `MinSDKVersion=26`, `TargetSDKVersion=28`, build ArmV7 + Arm64, Gradle activé, APK universel avec splits ABI/langue/densité
 
 ---
 
@@ -103,12 +103,13 @@ RandomDraw/
 
 - Envoi du résultat par e-mail / SMS
 - Génération d'un lien partageable
-- Partage étendu (iOS, réseaux sociaux)
+- Partage étendu (iOS via `UIActivityViewController`, réseaux sociaux)
 - Nouveau thème visuel (ex. « Néon Nuit » dark mode)
+- Montée du `TargetSDKVersion` (28 → 34) pour la conformité Play Store
 
 ---
 
 ## 👤 Auteur
 
 **Simon Lepetit** — Développeur jeux vidéo & gameplay
-Portfolio : https://www.lepetitportfolio.fr/ | GitHub : https://github.com/LepetitPortfolio/RandomDraw
+Portfolio : https://www.lepetitportfolio.fr/ | GitHub : https://github.com/LepetitPortfolio
