@@ -1,8 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidManifestUpdates>
+        <addElements tag="application">
+            <provider
+                android:name="androidx.core.content.FileProvider"
+                android:authorities="${applicationId}.fileprovider"
+                android:exported="false"
+                android:grantUriPermissions="true">
+                <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/file_paths" />
+            </provider>
+        </addElements>
+    </androidManifestUpdates>
+
+    <resourceCopies>
+        <copyFile src="$S(PluginDir)/file_paths.xml"
+                  dst="$S(BuildDir)/res/xml/file_paths.xml" />
+    </resourceCopies>
+
+    <gradleProperties>
+        <insertNew>android.useAndroidX=true</insertNew>
+        <insertNew>android.enableJetifier=true</insertNew>
+    </gradleProperties>
+
     <buildGradleAdditions>
-        <insert>
-			dependencies { implementation 'androidx.core:core:1.6.0'}
-        </insert>
+        <insertValue value="dependencies { implementation 'androidx.core:core:1.3.2' }" />
+        <insertNewline />
     </buildGradleAdditions>
+    <gameActivityClassAdditions>
+        <insert><![CDATA[
+        public boolean rdSaveImageToGallery(String path, String displayName) {
+            try {
+                java.io.File src = new java.io.File(path);
+                if (!src.exists()) return false;
+                android.content.ContentValues values = new android.content.ContentValues();
+                values.put(android.provider.MediaStore.Images.Media.DISPLAY_NAME, displayName);
+                values.put(android.provider.MediaStore.Images.Media.MIME_TYPE, "image/png");
+                if (android.os.Build.VERSION.SDK_INT >= 29) {
+                    values.put(android.provider.MediaStore.Images.Media.RELATIVE_PATH, "Pictures/RandomDraw");
+                    values.put(android.provider.MediaStore.Images.Media.IS_PENDING, 1);
+                }
+                android.content.ContentResolver resolver = getContentResolver();
+                android.net.Uri uri = resolver.insert(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                if (uri == null) return false;
+                try (java.io.OutputStream out = resolver.openOutputStream(uri);
+                     java.io.InputStream in = new java.io.FileInputStream(src)) {
+                    byte[] buf = new byte[8192];
+                    int n;
+                    while ((n = in.read(buf)) > 0) out.write(buf, 0, n);
+                }
+                if (android.os.Build.VERSION.SDK_INT >= 29) {
+                    values.clear();
+                    values.put(android.provider.MediaStore.Images.Media.IS_PENDING, 0);
+                    resolver.update(uri, values, null, null);
+                }
+                return true;
+            } catch (Exception e) {
+                android.util.Log.e("RDShare", "rdSaveImageToGallery failed", e);
+                return false;
+            }
+        }
+        ]]></insert>
+    </gameActivityClassAdditions>
+
 </root>
