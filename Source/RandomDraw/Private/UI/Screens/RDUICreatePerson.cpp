@@ -25,7 +25,7 @@ void URDUICreatePerson::CreatePerson()
 
 bool URDUICreatePerson::CheckFormValidity()
 {
-	if((!m_Person.m_Name.IsEmpty()) && (!m_Person.m_FirstGroupID.IsEmpty() || !m_Person.m_SecondGroupID.IsEmpty()))
+	if((!m_Person.m_Name.IsEmpty()) && (!m_FirstGroupSelector->GetGroup()->m_ID.IsEmpty() || !m_SecondGroupSelector->GetGroup()->m_ID.IsEmpty()))
 	{
 		return true;
 	}
