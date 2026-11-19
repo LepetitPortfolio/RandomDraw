@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidManifestUpdates>
-        <addElements tag="application">
-            <provider
+	<androidManifestUpdates>
+		<addElements tag="application">
+			<provider
                 android:name="androidx.core.content.FileProvider"
                 android:authorities="${applicationId}.fileprovider"
                 android:exported="false"
                 android:grantUriPermissions="true">
-                <meta-data
+				<meta-data
                     android:name="android.support.FILE_PROVIDER_PATHS"
                     android:resource="@xml/file_paths" />
-            </provider>
-        </addElements>
-    </androidManifestUpdates>
+			</provider>
+		</addElements>
+	</androidManifestUpdates>
 
-    <resourceCopies>
-        <copyFile src="$S(PluginDir)/res/xml/file_paths.xml"
+	<resourceCopies>
+		<copyFile src="$S(PluginDir)/res/xml/file_paths.xml"
           dst="$S(BuildDir)/res/xml/file_paths.xml" />
-    </resourceCopies>
+	</resourceCopies>
 
-    <gradleProperties>
-        <insertNew>android.useAndroidX=true</insertNew>
-        <insertNew>android.enableJetifier=true</insertNew>
-    </gradleProperties>
+	<gradleProperties>
+		<insertNew>android.useAndroidX=true</insertNew>
+		<insertNew>android.enableJetifier=true</insertNew>
+	</gradleProperties>
 
 	<buildGradleAdditions>
 		<insert>
 			dependencies { implementation 'androidx.core:core:1.3.2' }
 		</insert>
 	</buildGradleAdditions>
-    <gameActivityClassAdditions>
-        <insert><![CDATA[
+	<gameActivityClassAdditions>
+		<insert>
+			<![CDATA[
         public boolean rdSaveImageToGallery(String path, String displayName) {
             try {
                 java.io.File src = new java.io.File(path);
@@ -63,9 +64,8 @@
                 return false;
             }
         }
-        ]]></insert>
-		<insert>
-			public boolean rdShareImage(String path, String text) {
+		
+		public boolean rdShareImage(String path, String text) {
 			try {
 			java.io.File file = new java.io.File(path);
 			android.net.Uri uri = androidx.core.content.FileProvider.getUriForFile(
@@ -102,7 +102,8 @@
 			return false;
 			}
 			}
+        ]]>
 		</insert>
-    </gameActivityClassAdditions>
+	</gameActivityClassAdditions>
 
 </root>
