@@ -16,8 +16,8 @@
     </androidManifestUpdates>
 
     <resourceCopies>
-        <copyFile src="$S(PluginDir)/file_paths.xml"
-                  dst="$S(BuildDir)/res/xml/file_paths.xml" />
+        <copyFile src="$S(PluginDir)/res/xml/file_paths.xml"
+          dst="$S(BuildDir)/res/xml/file_paths.xml" />
     </resourceCopies>
 
     <gradleProperties>
