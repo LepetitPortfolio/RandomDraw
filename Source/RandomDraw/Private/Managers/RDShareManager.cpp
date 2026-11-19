@@ -234,5 +234,4 @@ bool URDShareManager::AndroidScanFileInGallery(const FString& _ImagePath)
     jboolean Ok = Env->CallBooleanMethod(Activity, Method, (jstring)PathJ.Obj, (jstring)NameJ.Obj);
     return CheckJNI(Env, TEXT("rdSaveImageToGallery")) && Ok;
 }
-
 #endif

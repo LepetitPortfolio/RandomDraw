@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
-    <!-- Dossier ProjectSavedDir (où tu sauvegardes tes screenshots) -->
-    <saved-files-path name="rd_screenshots" path="Screenshots/" />
-    <saved-files-path name="rd_root" path="." />
-
-    <!-- Au cas où tu utiliserais d'autres dossiers -->
-    <cache-path name="cache" path="." />
-    <external-cache-path name="ext_cache" path="." />
-    <external-files-path name="ext_files" path="." />
+	<external-files-path name="external_app_files" path="." />
+	<cache-path name="cache" path="." />
 </paths>
