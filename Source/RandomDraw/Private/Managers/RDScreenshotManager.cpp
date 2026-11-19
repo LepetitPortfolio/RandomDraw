@@ -3,7 +3,6 @@
 
 #include "Managers/RDScreenshotManager.h"
 #include "Engine/Texture2D.h"
-#include "IImageWrapper.h"
 #include "IImageWrapperModule.h"
 #include "Modules/ModuleManager.h"
 #include "Misc/FileHelper.h"
@@ -69,17 +68,16 @@ bool URDScreenshotManager::SaveWidgetAsPNG(UUserWidget* _Widget, const FString& 
 	renderTargetResource->ReadPixels(pixels);
 
 	// Sauvegarde en PNG (utilise la fonction précédente)
-	return SaveCustomPixelsAsImage(pixels, _Size.X, _Size.Y, _FilePath, true);
+	return SaveCustomPixelsAsImage(pixels, _Size.X, _Size.Y, _FilePath);
 }
 
 // Génère une image à partir d'un tableau de pixels
-bool URDScreenshotManager::SaveCustomPixelsAsImage(const TArray<FColor>& _Pixels, int32 _Width, int32 _Height, const FString& _FilePath, bool _AsPNG)
+bool URDScreenshotManager::SaveCustomPixelsAsImage(const TArray<FColor>& _Pixels, int32 _Width, int32 _Height, const FString& _FilePath, EImageFormat _Format)
 {
 	if (_Pixels.Num() != _Width * _Height) return false;
 
 	IImageWrapperModule& imageWrapperModule = FModuleManager::LoadModuleChecked<IImageWrapperModule>("ImageWrapper");
-	EImageFormat format = _AsPNG ? EImageFormat::PNG : EImageFormat::JPEG;
-	TSharedPtr<IImageWrapper> imageWrapper = imageWrapperModule.CreateImageWrapper(format);
+	TSharedPtr<IImageWrapper> imageWrapper = imageWrapperModule.CreateImageWrapper(_Format);
 
 	if ((imageWrapper.IsValid()) && (imageWrapper->SetRaw(_Pixels.GetData(), _Pixels.Num() * sizeof(FColor), _Width, _Height, ERGBFormat::BGRA, 8)))
 	{

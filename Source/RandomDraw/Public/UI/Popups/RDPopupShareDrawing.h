@@ -14,14 +14,6 @@ class RANDOMDRAW_API URDPopupShareDrawing : public URDPopupBase
 {
 	GENERATED_BODY()
 
-public:
-
-	/**
-	* Launch the drawing share process
-	*/
-	UFUNCTION(BlueprintCallable, Category = PopupShareDrawing)
-	void ShareDrawing();
-
 protected:
 
 	/* Message */
@@ -36,6 +28,12 @@ protected:
 	* UE4 Function : Called just before to display the UMG
 	*/
 	virtual void NativeConstruct() override;
+
+	/**
+	* Launch the drawing share process
+	*/
+	UFUNCTION(BlueprintCallable, Category = PopupShareDrawing)
+	void ShareDrawing();
 
 	/**
 	* Remove the popup

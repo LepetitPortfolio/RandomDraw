@@ -7,6 +7,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Engine/TextureRenderTarget2D.h"
 #include "Structs/RDRandomDraw.h"
+#include "IImageWrapper.h"
 #include "RDScreenshotManager.generated.h"
 
 /**
@@ -47,6 +48,6 @@ private:
 	* @param _AsPNG - Idicate if the pictire in out is a png file or not
 	* @return Return a value true or false if the save was sucess or not
 	*/
-	bool SaveCustomPixelsAsImage(const TArray<FColor>& _Pixels, int32 _Width, int32 _Height, const FString& _FilePath, bool _AsPNG = true);
+	bool SaveCustomPixelsAsImage(const TArray<FColor>& _Pixels, int32 _Width, int32 _Height, const FString& _FilePath, EImageFormat _Format = EImageFormat::JPEG);
 
 };

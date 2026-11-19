@@ -51,5 +51,33 @@ void URDWidgetRandomDrawLine::ShowRandomDraw()
 
 void URDWidgetRandomDrawLine::ShareRandomDraw()
 {
-	URDFunctionLibrary::GetShareManager()->SetRandomDrawIDInWait(m_RandomDraw);
+	//URDFunctionLibrary::GetShareManager()->SetRandomDrawIDInWait(m_RandomDraw);
+
+	URDShareManager* ShareManager = URDFunctionLibrary::GetShareManager();
+	URDScreenshotManager* ScreenshotManager = URDFunctionLibrary::GetScreenshotManager();
+	if (!ShareManager || !ScreenshotManager)
+	{
+		UE_LOG(LogTemp, Error, TEXT("[RDShare] Manager manquant (Share=%d, Screenshot=%d)"),
+			ShareManager != nullptr, ScreenshotManager != nullptr);
+		return;
+	}
+
+	FString ScreenshotPath = ScreenshotManager->TakeScreenshotOfRandomDraw(m_RandomDraw);
+
+	if (ScreenshotPath.IsEmpty())
+	{
+		UE_LOG(LogTemp, Error, TEXT("[RDShare] Chemin de capture vide"));
+		return;
+	}
+
+	// Chemin absolu obligatoire pour FileProvider
+	ScreenshotPath = FPaths::ConvertRelativePathToFull(ScreenshotPath);
+#if PLATFORM_ANDROID
+	ScreenshotPath = IFileManager::Get().ConvertToAbsolutePathForExternalAppForWrite(*ScreenshotPath);
+#endif
+
+	UE_LOG(LogTemp, Log, TEXT("[RDShare] ShareDrawing -> %s (existe=%d)"),
+		*ScreenshotPath, FPaths::FileExists(ScreenshotPath));
+
+	ShareManager->ShareImage(ScreenshotPath, "");
 }

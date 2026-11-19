@@ -13,20 +13,31 @@ void URDWidgetThemesSelector::InitValue()
 
 	if (randomDrawGameMode)
 	{
-		randomDrawGameMode->GetThemeDataTable()->GetAllRows<FRDTheme>("", m_ThemeList);
+		TArray<FRDTheme*> themeList;
+		randomDrawGameMode->GetThemeDataTable()->GetAllRows<FRDTheme>("", themeList);
+
+		if (m_ThemeList.Num() != themeList.Num())
+		{
+			m_ThemeList = themeList;
+		}
 	}
 
 	if(m_ThemeList.Num() > 0)
 	{
-		for (FRDTheme* theme : m_ThemeList)
+		if (m_ThemeList.Num() != m_WidgetList->GetChildrenCount())
 		{
-			if (theme)
+			m_WidgetList->ClearChildren();
+
+			for (FRDTheme* theme : m_ThemeList)
 			{
-				URDWidgetThemeLine* themeLine = CreateWidget<URDWidgetThemeLine>(this, m_ThemeLineTemplate);
-				if (themeLine)
+				if (theme)
 				{
-					themeLine->InitValue(theme, this);
-					m_WidgetList->AddChild(themeLine);
+					URDWidgetThemeLine* themeLine = CreateWidget<URDWidgetThemeLine>(this, m_ThemeLineTemplate);
+					if (themeLine)
+					{
+						themeLine->InitValue(theme, this);
+						m_WidgetList->AddChild(themeLine);
+					}
 				}
 			}
 		}
