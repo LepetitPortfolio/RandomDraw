@@ -104,6 +104,10 @@ import androidx.core.content.FileProvider;
                             Intent sendIntent = new Intent(Intent.ACTION_SEND);
                             sendIntent.setType("image/png");
                             sendIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+							if (text != null && !text.isEmpty()) 
+							{
+                                sendIntent.putExtra(Intent.EXTRA_TEXT, text);
+                            }
                             sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
                             Intent chooser = Intent.createChooser(sendIntent, "Partager le dessin");
