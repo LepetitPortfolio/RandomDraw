@@ -23,7 +23,7 @@ public:
 
 	/**
 	* Cook a picture based on ramdom draw data in inpute
-	* @param _RandomDraw - Random Draw data to make a picture
+	o* @param _RandomDraw - Random Draw data to make a picture
 	* @return Return a value true or false if the process was sucess or not
 	*/
 	FString TakeScreenshotOfRandomDraw(FRDRandomDraw _RandomDraw);

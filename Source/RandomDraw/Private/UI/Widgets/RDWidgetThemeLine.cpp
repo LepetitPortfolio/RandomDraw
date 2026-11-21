@@ -24,6 +24,11 @@ FSlateColor URDWidgetThemeLine::GetNewThemeTextPrimaryColor()
 	return m_Theme->TextPrimary;
 }
 
+FSlateColor URDWidgetThemeLine::GetNewThemePrimaryColor()
+{
+	return  m_Theme->Primary;
+}
+
 FSlateColor URDWidgetThemeLine::GetNewThemeSurfaceColor()
 {
 	return m_Theme->Surface;

@@ -41,6 +41,9 @@ protected:
 	FSlateColor GetNewThemeTextPrimaryColor();
 
 	UFUNCTION(BlueprintGetter, Category = RDWidgetThemeLine)
+	FSlateColor GetNewThemePrimaryColor();
+
+	UFUNCTION(BlueprintGetter, Category = RDWidgetThemeLine)
 	FSlateColor GetNewThemeSurfaceColor();
 
 	UFUNCTION(BlueprintGetter, Category = RDWidgetThemeLine)

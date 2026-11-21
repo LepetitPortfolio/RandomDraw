@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
@@ -13,27 +13,67 @@ struct FRDTheme : public FTableRowBase
 
 public:
 
+    // ─────────────────────────────────────────────────────────────
+    // Nom du thème (clé d'identification dans la DataTable)
+    // Ex : "Default", "Light", "Neon"...
+    // Sert à afficher le thème dans le sélecteur et à le retrouver via GetRow.
+    // ─────────────────────────────────────────────────────────────
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FName ThemeName = FName("Default");
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite) 
+    // ─────────────────────────────────────────────────────────────
+    // Couleur de FOND de l'application (arrière-plan des écrans)
+    // Valeur par défaut : gris très foncé bleuté (0.10, 0.10, 0.14)
+    // ─────────────────────────────────────────────────────────────
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FLinearColor Background = FLinearColor(0.10f, 0.10f, 0.14f);
-    
-    UPROPERTY(EditAnywhere, BlueprintReadWrite) 
+
+    // ─────────────────────────────────────────────────────────────
+    // Couleur des SURFACES surélevées : cartes, panneaux, popups,
+    // barres de navigation... (légèrement plus clair que le fond)
+    // Valeur par défaut : gris foncé (0.16, 0.16, 0.22)
+    // ─────────────────────────────────────────────────────────────
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FLinearColor Surface = FLinearColor(0.16f, 0.16f, 0.22f);
-    
-    UPROPERTY(EditAnywhere, BlueprintReadWrite) 
+
+    // ─────────────────────────────────────────────────────────────
+    // Couleur PRIMAIRE : actions principales (bouton "Tirer au sort",
+    // éléments sélectionnés, titres importants)
+    // Valeur par défaut : violet (0.55, 0.30, 0.95)
+    // ─────────────────────────────────────────────────────────────
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FLinearColor Primary = FLinearColor(0.55f, 0.30f, 0.95f);
-    
-    UPROPERTY(EditAnywhere, BlueprintReadWrite) 
-    FLinearColor Secondary = FLinearColor(0.20f, 0.85f, 0.90f); 
-    
-    UPROPERTY(EditAnywhere, BlueprintReadWrite) 
+
+    // ─────────────────────────────────────────────────────────────
+    // Couleur SECONDAIRE : accents, liens, résultats du tirage,
+    // icônes secondaires (bouton "Partager" par exemple)
+    // Valeur par défaut : cyan (0.20, 0.85, 0.90)
+    // ─────────────────────────────────────────────────────────────
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    FLinearColor Secondary = FLinearColor(0.20f, 0.85f, 0.90f);
+
+    // ─────────────────────────────────────────────────────────────
+    // Couleur du TEXTE PRINCIPAL : titres, contenu important
+    // Doit contraster fortement avec Background/Surface
+    // Valeur par défaut : blanc pur (1.0, 1.0, 1.0)
+    // ─────────────────────────────────────────────────────────────
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FLinearColor TextPrimary = FLinearColor(1.0f, 1.0f, 1.0f);
-    
-    UPROPERTY(EditAnywhere, BlueprintReadWrite) 
+
+    // ─────────────────────────────────────────────────────────────
+    // Couleur du TEXTE SECONDAIRE : descriptions, métadonnées,
+    // textes désactivés (plus discret que TextPrimary)
+    // Valeur par défaut : gris clair (0.65, 0.65, 0.70)
+    // ─────────────────────────────────────────────────────────────
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FLinearColor TextSecondary = FLinearColor(0.65f, 0.65f, 0.70f);
-    
-    UPROPERTY(EditAnywhere, BlueprintReadWrite) 
+
+    // ─────────────────────────────────────────────────────────────
+    // Couleur DANGER : actions destructrices (supprimer une personne,
+    // un groupe, un tirage), messages d'erreur
+    // Valeur par défaut : rouge (0.95, 0.25, 0.30)
+    // ─────────────────────────────────────────────────────────────
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FLinearColor Danger = FLinearColor(0.95f, 0.25f, 0.30f);
+
 };
