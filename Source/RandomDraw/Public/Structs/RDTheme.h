@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "RDColorRange.h"
 #include "Engine/DataTable.h"
 #include "RDTheme.generated.h"
 
@@ -45,14 +46,6 @@ public:
     FLinearColor Primary = FLinearColor(0.55f, 0.30f, 0.95f);
 
     // ─────────────────────────────────────────────────────────────
-    // Couleur SECONDAIRE : accents, liens, résultats du tirage,
-    // icônes secondaires (bouton "Partager" par exemple)
-    // Valeur par défaut : cyan (0.20, 0.85, 0.90)
-    // ─────────────────────────────────────────────────────────────
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    FLinearColor Secondary = FLinearColor(0.20f, 0.85f, 0.90f);
-
-    // ─────────────────────────────────────────────────────────────
     // Couleur du TEXTE PRINCIPAL : titres, contenu important
     // Doit contraster fortement avec Background/Surface
     // Valeur par défaut : blanc pur (1.0, 1.0, 1.0)
@@ -76,4 +69,6 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FLinearColor Danger = FLinearColor(0.95f, 0.25f, 0.30f);
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    FRDColorRange ColorRange = FRDColorRange();
 };
