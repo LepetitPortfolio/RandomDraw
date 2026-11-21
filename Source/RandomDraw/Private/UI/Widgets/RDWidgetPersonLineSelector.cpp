@@ -12,6 +12,8 @@ void URDWidgetPersonLineSelector::InitValue(class URDUIViewerPersonsSelector* _P
 	m_PersonName = m_Person->m_Name;
 
 	m_PersonsSelector = _PersonsSelector;
+	m_Color = GetColorGroup(m_Person->m_FirstGroupID);
+
 }
 
 void URDWidgetPersonLineSelector::SetSelected(bool _Value)

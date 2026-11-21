@@ -13,6 +13,7 @@ void URDWidgetPersonLine::InitValue(FRDPerson* _Person, URDUIViewerPerson* _View
 	m_ViewerPerson = _ViewerPerson;
 
 	m_PersonName = m_Person->m_Name;
+	m_Color = GetColorGroup(m_Person->m_FirstGroupID);
 }
 
 void URDWidgetPersonLine::DeleteThePerson()

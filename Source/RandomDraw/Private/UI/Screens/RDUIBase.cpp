@@ -54,6 +54,11 @@ FLinearColor URDUIBase::GetColorGroup(FString _GroupID)
 	return FLinearColor(URDFunctionLibrary::GetThemeManager()->GetColorOfGroup(_GroupID));
 }
 
+void URDUIBase::ChangeColorStyle(UButton* _Button, FLinearColor _Color)
+{
+	_Button->BackgroundColor = _Color;
+}
+
 int URDUIBase::ReverseColor(int _ColorValue)
 {
 	_ColorValue = FMath::Clamp(_ColorValue, 0, 255);

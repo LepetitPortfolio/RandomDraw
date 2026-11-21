@@ -58,12 +58,20 @@ FLinearColor URDThemeManager::GetColorOfGroup(FString _GroupID) const
 {
 	FLinearColor outColor = GetCurrentTheme().ColorRange.FirstColor;
 
-	int groupIndex = URDFunctionLibrary::GetGroupManager()->GetGroupIndex(_GroupID);
+	float groupIndex = URDFunctionLibrary::GetGroupManager()->GetGroupIndex(_GroupID);
 
-	if (groupIndex > 0)
+	if (groupIndex < 0)
 	{
 		groupIndex = 0;
 	}
 
-	return outColor + ((GetCurrentTheme().ColorRange.GetColorRange() / URDFunctionLibrary::GetGroupManager()->GetGroupCount())* groupIndex);
+	FLinearColor colorRange = GetCurrentTheme().ColorRange.GetColorRange();
+	float groupCount = URDFunctionLibrary::GetGroupManager()->GetGroupCount() - 1;
+
+	if (groupCount > 0)
+	{
+		outColor += (colorRange / groupCount) * groupIndex;
+	}
+
+	return outColor;
 }

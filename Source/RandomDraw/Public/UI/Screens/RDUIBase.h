@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Components/Button.h"
 #include "Styling/SlateColor.h"
 #include "RDUIBase.generated.h"
 
@@ -47,6 +48,9 @@ protected:
 
 	UFUNCTION(BlueprintGetter, Category = UIBase)
 	FLinearColor GetColorGroup(FString _GroupID);
+
+	UFUNCTION(BlueprintCallable, Category = UIBase)
+	void ChangeColorStyle(UButton* _Button, FLinearColor _Color);
 
 private:
 	/**
