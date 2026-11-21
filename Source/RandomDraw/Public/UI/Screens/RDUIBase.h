@@ -37,9 +37,6 @@ protected:
 		FSlateColor GetPrimaryColor();
 
 	UFUNCTION(BlueprintGetter, Category = UIBase)
-		FSlateColor GetSecondaryColor();
-
-	UFUNCTION(BlueprintGetter, Category = UIBase)
 		FSlateColor GetTextPrimaryColor();
 
 	UFUNCTION(BlueprintGetter, Category = UIBase)

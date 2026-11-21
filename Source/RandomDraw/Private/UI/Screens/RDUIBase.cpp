@@ -34,11 +34,6 @@ FSlateColor URDUIBase::GetPrimaryColor()
 	return FSlateColor(URDFunctionLibrary::GetThemeManager()->GetCurrentPrimaryColor());
 }
 
-FSlateColor URDUIBase::GetSecondaryColor()
-{
-	return FSlateColor(URDFunctionLibrary::GetThemeManager()->GetCurrentSecondaryColor());
-}
-
 FSlateColor URDUIBase::GetTextPrimaryColor()
 {
 	return FSlateColor(URDFunctionLibrary::GetThemeManager()->GetCurrentTextPrimaryColor());
