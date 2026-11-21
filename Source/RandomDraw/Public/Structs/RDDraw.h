@@ -24,10 +24,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDDraw)
 		FString m_FirstPersonName = "";
 
-	/* First person color Drawed */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDDraw)
-		FLinearColor m_FirstPersonColor = FLinearColor();
-
 	/* Second person ID Drawed */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDDraw)
 		FString m_SecondPersonID = "";
@@ -36,9 +32,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDDraw)
 		FString m_SecondPersonName = "";
 
-	/* Second person Color Drawed */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDDraw)
-		FLinearColor m_SecondPersonColor = FLinearColor();
 
 	/**
 	* Constructor

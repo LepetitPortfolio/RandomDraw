@@ -44,6 +44,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "RandomDraw|Theme")
 	FLinearColor GetCurrentDangerColor() const;
 
+	UFUNCTION(BlueprintCallable, Category = "RandomDraw|Theme")
+	FLinearColor GetColorOfGroup(FString _GroupID) const;
+
 protected:	
 
 };

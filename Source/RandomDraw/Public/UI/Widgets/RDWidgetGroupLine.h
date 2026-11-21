@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "UI/Widgets/RDWidgetBase.h"
+#include "UI/Widgets/RDWidgetGroupBase.h"
 #include "Structs\RDGroup.h"
 #include "RDWidgetGroupLine.generated.h"
 
@@ -11,7 +11,7 @@
  * 
  */
 UCLASS()
-class RANDOMDRAW_API URDWidgetGroupLine : public URDWidgetBase
+class RANDOMDRAW_API URDWidgetGroupLine : public URDWidgetGroupBase
 {
 	GENERATED_BODY()
 
@@ -25,9 +25,6 @@ public:
 	void InitValue(FRDGroup* _Group, class URDUIViewerGroup* _ViewerGroup);
 
 protected:
-
-	/* Reference of group to displayed */
-	FRDGroup* m_Group = nullptr;
 
 	/* Reference of Widget parent */
 	UPROPERTY()

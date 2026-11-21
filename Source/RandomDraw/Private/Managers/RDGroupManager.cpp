@@ -48,3 +48,35 @@ void URDGroupManager::DeleteGroup(FRDGroup* _Group)
 	URDFunctionLibrary::GetPersonManager()->DeleteGroup(_Group);
 	URDFunctionLibrary::GetAppData()->m_Groups.Remove(_Group->m_ID);
 }
+
+int URDGroupManager::GetGroupCount()
+{
+	return URDFunctionLibrary::GetAppData()->m_Groups.Num();
+}
+
+int URDGroupManager::GetGroupIndex(FRDGroup* _Group)
+{
+	return GetGroupIndex(_Group->m_ID);
+}
+
+int URDGroupManager::GetGroupIndex(FString _GroupID)
+{
+	int outIndex = -1;
+	TMap<FString, FRDGroup>* groups = &URDFunctionLibrary::GetAppData()->m_Groups;
+	int index = 0;
+
+	for (TPair<FString, FRDGroup>& paire : *groups)
+	{
+		if (paire.Key == _GroupID)
+		{
+			outIndex = index;
+			break;
+		}
+		else
+		{
+			index++;
+		}
+	}
+
+	return outIndex;
+}

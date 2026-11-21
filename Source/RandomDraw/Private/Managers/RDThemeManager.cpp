@@ -3,6 +3,7 @@
 
 #include "Managers/RDThemeManager.h"
 #include "FunctionLibrary/RDFunctionLibrary.h"
+#include "Managers/RDGroupManager.h"
 #include "System/RandomDrawGameMode.h"
 #include "Structs/RDAppData.h"
 
@@ -51,4 +52,18 @@ FLinearColor URDThemeManager::GetCurrentTextSecondaryColor() const
 FLinearColor URDThemeManager::GetCurrentDangerColor() const
 {
 	return GetCurrentTheme().Danger;
+}
+
+FLinearColor URDThemeManager::GetColorOfGroup(FString _GroupID) const
+{
+	FLinearColor outColor = GetCurrentTheme().ColorRange.FirstColor;
+
+	int groupIndex = URDFunctionLibrary::GetGroupManager()->GetGroupIndex(_GroupID);
+
+	if (groupIndex > 0)
+	{
+		groupIndex = 0;
+	}
+
+	return outColor + ((GetCurrentTheme().ColorRange.GetColorRange() / URDFunctionLibrary::GetGroupManager()->GetGroupCount())* groupIndex);
 }

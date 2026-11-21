@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "UI/Widgets/RDWidgetBase.h"
+#include "UI/Widgets/RDWidgetGroupBase.h"
 #include "UI/Widgets/RDWidgetGroupSelection.h"
 #include "Components/ScrollBox.h"
 #include "Components/VerticalBox.h"
@@ -13,17 +13,11 @@
  * 
  */
 UCLASS()
-class RANDOMDRAW_API URDWidgetGroupSelector : public URDWidgetBase
+class RANDOMDRAW_API URDWidgetGroupSelector : public URDWidgetGroupBase
 {
 	GENERATED_BODY()
 
 public:
-
-	/**
-	* Return the reference of group
-	* @return reference of the group
-	*/
-	inline FRDGroup* GetGroup() { return m_Group; }
 
 	/**
 	* Changes the current group selected based on reference of group
@@ -49,9 +43,7 @@ protected:
 	/* Reference of VerticalBox Widget */
 	UPROPERTY(BlueprintReadOnly, Category = RDUICreatePerson, meta = (BindWidget))
 		UVerticalBox* m_WidgetList = nullptr;
-
-	/* reference of current group selected */
-	FRDGroup* m_Group = nullptr;
+	
 
 	/* Name of current group selected */
 	UPROPERTY(BlueprintReadOnly, Category = RDUICreatePerson)

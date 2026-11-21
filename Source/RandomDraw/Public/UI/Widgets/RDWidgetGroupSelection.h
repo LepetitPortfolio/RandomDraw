@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "UI/Widgets/RDWidgetBase.h"
+#include "UI/Widgets/RDWidgetGroupBase.h"
 #include "Structs/RDGroup.h"
 #include "RDWidgetGroupSelection.generated.h"
 
@@ -11,7 +11,7 @@
  * 
  */
 UCLASS()
-class RANDOMDRAW_API URDWidgetGroupSelection : public URDWidgetBase
+class RANDOMDRAW_API URDWidgetGroupSelection : public URDWidgetGroupBase
 {
 	GENERATED_BODY()
 	
@@ -25,9 +25,6 @@ public:
 	void InitValues(FRDGroup* _Group, class URDWidgetGroupSelector* _GroupSelector);
 
 protected:
-
-	/* Reference of group to displayed */
-	FRDGroup* m_Group = nullptr;
 	
 	/* Reference of Widget parent */
 	UPROPERTY(BlueprintReadOnly, Category = GroupSelection)

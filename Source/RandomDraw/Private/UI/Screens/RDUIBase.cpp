@@ -19,34 +19,39 @@ FText URDUIBase::GetThemeName()
 	return FText::FromName(URDFunctionLibrary::GetThemeManager()->GetCurrentThemeName());
 }
 
-FSlateColor URDUIBase::GetBackgroundColor()
+FLinearColor URDUIBase::GetBackgroundColor()
 {
-	return FSlateColor(URDFunctionLibrary::GetThemeManager()->GetCurrentBackgroundColor());
+	return FLinearColor(URDFunctionLibrary::GetThemeManager()->GetCurrentBackgroundColor());
 }
 
-FSlateColor URDUIBase::GetSurfaceColor()
+FLinearColor URDUIBase::GetSurfaceColor()
 {
-	return FSlateColor(URDFunctionLibrary::GetThemeManager()->GetCurrentSurfaceColor());
+	return FLinearColor(URDFunctionLibrary::GetThemeManager()->GetCurrentSurfaceColor());
 }
 
-FSlateColor URDUIBase::GetPrimaryColor()
+FLinearColor URDUIBase::GetPrimaryColor()
 {
-	return FSlateColor(URDFunctionLibrary::GetThemeManager()->GetCurrentPrimaryColor());
+	return FLinearColor(URDFunctionLibrary::GetThemeManager()->GetCurrentPrimaryColor());
 }
 
-FSlateColor URDUIBase::GetTextPrimaryColor()
+FLinearColor URDUIBase::GetTextPrimaryColor()
 {
-	return FSlateColor(URDFunctionLibrary::GetThemeManager()->GetCurrentTextPrimaryColor());
+	return FLinearColor(URDFunctionLibrary::GetThemeManager()->GetCurrentTextPrimaryColor());
 }
 
-FSlateColor URDUIBase::GetTextSecondaryColor()
+FLinearColor URDUIBase::GetTextSecondaryColor()
 {
-	return FSlateColor(URDFunctionLibrary::GetThemeManager()->GetCurrentTextSecondaryColor());
+	return FLinearColor(URDFunctionLibrary::GetThemeManager()->GetCurrentTextSecondaryColor());
 }
 
-FSlateColor URDUIBase::GetDangerColor()
+FLinearColor URDUIBase::GetDangerColor()
 {
-	return FSlateColor(URDFunctionLibrary::GetThemeManager()->GetCurrentDangerColor());
+	return FLinearColor(URDFunctionLibrary::GetThemeManager()->GetCurrentDangerColor());
+}
+
+FLinearColor URDUIBase::GetColorGroup(FString _GroupID)
+{
+	return FLinearColor(URDFunctionLibrary::GetThemeManager()->GetColorOfGroup(_GroupID));
 }
 
 int URDUIBase::ReverseColor(int _ColorValue)

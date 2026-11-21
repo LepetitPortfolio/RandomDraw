@@ -28,22 +28,25 @@ protected:
 		FText GetThemeName();
 
 	UFUNCTION(BlueprintGetter, Category = UIBase)
-		FSlateColor GetBackgroundColor();
+	FLinearColor GetBackgroundColor();
 	
 	UFUNCTION(BlueprintGetter, Category = UIBase)
-		FSlateColor GetSurfaceColor();
+	FLinearColor GetSurfaceColor();
 
 	UFUNCTION(BlueprintGetter, Category = UIBase)
-		FSlateColor GetPrimaryColor();
+	FLinearColor GetPrimaryColor();
 
 	UFUNCTION(BlueprintGetter, Category = UIBase)
-		FSlateColor GetTextPrimaryColor();
+	FLinearColor GetTextPrimaryColor();
 
 	UFUNCTION(BlueprintGetter, Category = UIBase)
-		FSlateColor GetTextSecondaryColor();
+	FLinearColor GetTextSecondaryColor();
 
 	UFUNCTION(BlueprintGetter, Category = UIBase)
-		FSlateColor GetDangerColor();
+	FLinearColor GetDangerColor();
+
+	UFUNCTION(BlueprintGetter, Category = UIBase)
+	FLinearColor GetColorGroup(FString _GroupID);
 
 private:
 	/**

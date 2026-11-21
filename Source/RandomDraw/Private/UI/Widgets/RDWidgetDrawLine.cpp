@@ -8,28 +8,13 @@ void URDWidgetDrawLine::InitValue(FRDDraw* _Draw)
 {
 	m_Draw = _Draw;
 
-	if (m_Draw->m_FirstPersonName.IsEmpty())
-	{
-		FRDPerson* firstPerson = URDFunctionLibrary::GetPerson(m_Draw->m_FirstPersonID);
-		m_FirstPersonLibelle = firstPerson->m_Name;
-	}
-	else
-	{
-		m_FirstPersonLibelle = m_Draw->m_FirstPersonName;
-		m_FirstPersonColor = m_Draw->m_FirstPersonColor;
-	}
+	FRDPerson* firstPerson = URDFunctionLibrary::GetPerson(m_Draw->m_FirstPersonID);
+	m_FirstPersonLibelle = firstPerson->m_Name;
+	m_FirstPersonColor = GetColorGroup(firstPerson->m_FirstGroupID);
 
-	if (m_Draw->m_SecondPersonName.IsEmpty())
-	{
-		FRDPerson* secondPerson = URDFunctionLibrary::GetPerson(m_Draw->m_SecondPersonID);
-		m_SecondPersonLibelle = secondPerson->m_Name;
-	}
-	else
-	{
-		m_SecondPersonLibelle = m_Draw->m_SecondPersonName;
-		m_SecondPersonColor = m_Draw->m_SecondPersonColor;
-	}
-
+	FRDPerson* secondPerson = URDFunctionLibrary::GetPerson(m_Draw->m_SecondPersonID);
+	m_SecondPersonLibelle = secondPerson->m_Name;
+	m_SecondPersonColor = GetColorGroup(secondPerson->m_FirstGroupID);
 
 }
 

@@ -43,6 +43,12 @@ public:
 	*/
 	void DeleteGroup(FRDGroup* _Group);
 
+	int GetGroupCount();
+
+	int GetGroupIndex(FRDGroup* _Group);
+
+	int GetGroupIndex(FString _GroupID);
+
 protected:
 
 	/* reference of group currently modify */

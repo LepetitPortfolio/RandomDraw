@@ -49,10 +49,10 @@ protected:
 
 	/*Color of first persone*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDWidgetPersonLine)
-		FLinearColor m_FirstPersonColor = FLinearColor::Black;
+	FLinearColor m_FirstPersonColor = FLinearColor::Black;
 
 	/*Color of second persone*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = RDWidgetPersonLine)
-		FLinearColor m_SecondPersonColor = FLinearColor::Black;
+	FLinearColor m_SecondPersonColor = FLinearColor::Black;
 	
 };
