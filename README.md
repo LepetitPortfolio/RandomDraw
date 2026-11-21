@@ -16,29 +16,30 @@ Exemples d'utilisation :
 
 ---
 
-## ✨ Fonctionnalités implémentées
+## ✨ Fonctionnalités
 
 ### 👥 Gestion des personnes
-- Création et modification de fiches personnes
-- Visualisation de la liste des personnes
+- Création / modification de fiches personnes, liste des personnes
 
 ### 🗂️ Gestion des groupes
-- Création et modification de groupes
-- Visualisation des groupes
+- Création / modification de groupes, liste des groupes
 
 ### 🎲 Tirages au sort
-- Création de tirages avec sélection aléatoire d'une personne dans un groupe
-- Historique des tirages effectués
+- Tirage aléatoire d'une personne dans un groupe, historique des tirages
+
+### 🎨 Système de thèmes
+- Thèmes définis dans une **DataTable** (`FRDTheme`) : `Background`, `Surface`, `Primary`, `TextPrimary`, `TextSecondary`, `Danger` + plage de dégradé (`FRDColorRange`)
+- Géré par `RDThemeManager`
 
 ### 🎫 Menu Tickets
 - Écran dédié
 
 ### 📤 Partage Android
-- Partage du résultat via le système natif Android (share sheet)
-- Capture d'écran intégrée du résultat du tirage
+- Partage du résultat via le share sheet natif (APL `RDShare_APL.xml` : `FileProvider` AndroidX + JNI)
+- Capture d'écran intégrée du résultat
 
 ### 💾 Sauvegarde
-- Persistance des données (personnes, groupes, tirages, historique)
+- Persistance des données via `RDSaveManager` / `RDSaveData`
 
 ---
 
@@ -49,21 +50,13 @@ Exemples d'utilisation :
 | Moteur | Unreal Engine 4.27 |
 | Plateformes cibles | Android, iOS |
 | Langages | C++ (module Runtime) + Blueprints/UMG |
-| Rendu | Profil matériel **Mobile**, MSAA x2, orientation **Portrait** |
+| Rendu | Profil Mobile, MSAA x2, orientation Portrait |
 
-### Structure C++ (`Source/RandomDraw/`)
-- **Managers/** : `RDGroupManager`, `RDPersonManager`, `RDRandomDrawManager`, `RDSaveManager`, `RDScreenshotManager`, `RDShareManager`, `RDThemeManager`
-- **UI/** : classes C++ des Screens (16 écrans : MainMenu, CreatePerson, ModifyPerson, CreateGroup, ModifyGroup, viewers, sélecteurs, paramètres, Tickets…) et bases réutilisables (`RDUIBase`, `RDUIViewerBase`)
-- **Structs/** : 8 structures de données (`RDPerson`, `RDGroup`, `RDRandomDraw`, `RDDraw`, `RDAppData`, `RDStateHistory`, `RDTheme`, `RDUIInstance`)
-- **Save/** : `RDSaveData`
-- **Enums/**, **FunctionLibrary/**, **System/** (`RDGameMode`, `RDGameInstance`)
-
-### Blueprints / UMG (`Content/`)
-- **System/** : `BP_RDGameMode`, HUD
-- **UI/Screens/** : écrans du jeu
-- **UI/Widgets/** : 13 widgets réutilisables (lignes personnes/groupes/tirages, sélecteur de couleur…)
-- **UI/Popup/** : popups de confirmation
-- **Level/** : map `Main` | **Textures/**, **Icones/**, **DataTables/**
+### Modules C++ (`Source/RandomDraw/`)
+- **Managers/** : `RDPersonManager`, `RDGroupManager`, `RDRandomDrawManager`, `RDSaveManager`, `RDScreenshotManager`, `RDShareManager`, `RDThemeManager`
+- **Structs/** : `RDPerson`, `RDGroup`, `RDRandomDraw`, `RDDraw`, `RDAppData`, `RDStateHistory`, `RDTheme`, `RDColorRange`, `RDUIInstance`
+- **UI/** : 15 classes d'écrans (`RDUIBase`, `RDUIViewerBase`, MainMenu, Create/Modify Person/Group, viewers, sélecteurs, Settings, Tickets…), popups et widgets
+- **Build/Android/** : `RDShare_APL.xml` (partage natif Android)
 
 ---
 
@@ -71,14 +64,11 @@ Exemples d'utilisation :
 
 RandomDraw/
 ├── Config/            → DefaultEngine.ini, DefaultGame.ini…
-├── Content/           → Assets UE (Blueprints, UI, textures)
-├── Plugins/
-│   └── VisualStudioTools/   → outils VS (Win64)
-├── Source/
-│   └── RandomDraw/    → code C++ du jeu
+├── Content/           → Assets UE (Blueprints, UI, DataTables, textures)
+├── Plugins/VisualStudioTools/
+├── Source/RandomDraw/ → code C++ (Managers, Structs, UI, Build/Android)
 ├── RandomDraw.uproject
 └── README.md
-
 
 ---
 
@@ -86,30 +76,16 @@ RandomDraw/
 
 ### Prérequis
 - Unreal Engine **4.27**
-- Visual Studio (Windows) avec le workload C++ Unreal
+- Visual Studio (Windows) avec workload C++ Unreal
 - Android NDK / SDK pour le packaging mobile
 
 ### Étapes
-1. Cloner le dépôt : `git clone https://github.com/LepetitPortfolio/RandomDraw.git`
+1. `git clone https://github.com/LepetitPortfolio/RandomDraw.git`
 2. Ouvrir `RandomDraw.uproject` avec UE 4.27
-3. Compiler, puis lancer depuis l'éditeur ou packager pour Android/iOS
-
-### Configuration Android
-- `MinSDKVersion=26`, `TargetSDKVersion=28`, build ArmV7 + Arm64, Gradle activé, APK universel avec splits ABI/langue/densité
-
----
-
-## 🔮 Améliorations envisagées
-
-- Envoi du résultat par e-mail / SMS
-- Génération d'un lien partageable
-- Partage étendu (iOS via `UIActivityViewController`, réseaux sociaux)
-- Nouveau thème visuel (ex. « Néon Nuit » dark mode)
-- Montée du `TargetSDKVersion` (28 → 34) pour la conformité Play Store
+3. Compiler puis lancer depuis l'éditeur ou packager pour Android/iOS
 
 ---
 
 ## 👤 Auteur
 
-**Simon Lepetit** — Développeur jeux vidéo & gameplay
-Portfolio : https://www.lepetitportfolio.fr/ | GitHub : https://github.com/LepetitPortfolio
+**Simon Lepetit** — Portfolio : https://www.lepetitportfolio.fr/ | GitHub : https://github.com/LepetitPortfolio
