@@ -12,20 +12,11 @@ struct FRDColorRange
 
 public:
 
-    // ─────────────────────────────────────────────────────────────
-    // Couleur de FOND de l'application (arrière-plan des écrans)
-    // Valeur par défaut : gris très foncé bleuté (0.10, 0.10, 0.14)
-    // ─────────────────────────────────────────────────────────────
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    FLinearColor FirstColor = FLinearColor(0.0f, 0.0f, 0.0f);
+    FLinearColor FirstColor = FLinearColor(0.135633f, 0.806952f, 0.947307f);
 
-    // ─────────────────────────────────────────────────────────────
-    // Couleur des SURFACES surélevées : cartes, panneaux, popups,
-    // barres de navigation... (légèrement plus clair que le fond)
-    // Valeur par défaut : gris foncé (0.16, 0.16, 0.22)
-    // ─────────────────────────────────────────────────────────────
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    FLinearColor SecondColor = FLinearColor(1.0f, 1.0f, 1.0f);
+    FLinearColor SecondColor = FLinearColor(0.002428f, 0.283149f, 0.445201f);
 
 
     FLinearColor GetColorRange() const
