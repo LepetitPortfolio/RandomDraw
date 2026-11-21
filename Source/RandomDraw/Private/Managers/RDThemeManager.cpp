@@ -38,11 +38,6 @@ FLinearColor URDThemeManager::GetCurrentPrimaryColor() const
 	return GetCurrentTheme().Primary;
 }
 
-FLinearColor URDThemeManager::GetCurrentSecondaryColor() const
-{
-	return GetCurrentTheme().Secondary;
-}
-
 FLinearColor URDThemeManager::GetCurrentTextPrimaryColor() const
 {
 	return GetCurrentTheme().TextPrimary;

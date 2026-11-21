@@ -36,9 +36,6 @@ public:
 	FLinearColor GetCurrentPrimaryColor() const;
 
 	UFUNCTION(BlueprintCallable, Category = "RandomDraw|Theme")
-	FLinearColor GetCurrentSecondaryColor() const;
-
-	UFUNCTION(BlueprintCallable, Category = "RandomDraw|Theme")
 	FLinearColor GetCurrentTextPrimaryColor() const;
 
 	UFUNCTION(BlueprintCallable, Category = "RandomDraw|Theme")
